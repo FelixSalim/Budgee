@@ -13,4 +13,10 @@ class PageController extends Controller
         // Logic for the home page
         return view('dashboard');
     }
+
+    public function categories()
+    {
+        // Logic for the categories page
+        return view('categories');
+    }
 }
