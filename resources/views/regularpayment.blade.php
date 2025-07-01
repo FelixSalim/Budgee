@@ -3,9 +3,11 @@
 @section('content')
 <div class="container mt-5">
     <div class="d-flex justify-content-end mb-4">
-        <button class="btn btn-primary rounded-pill px-4">
+        <a href="/newregularpayment">
+            <button class="btn btn-primary rounded-pill px-4">
             + New Regular Payment
         </button>
+        </a>
     </div>
 
     <div class="card shadow-sm" style="border-radius: 1rem; width: 90%;">

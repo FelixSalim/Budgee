@@ -24,4 +24,9 @@ class PageController extends Controller
         // Logic for the categories page
         return view('regularpayment');
     }
+    public function newregularpayment()
+    {
+        // Logic for the categories page
+        return view('newregularpayment');
+    }
 }
