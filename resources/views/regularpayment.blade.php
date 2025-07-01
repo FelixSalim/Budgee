@@ -26,79 +26,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Row 1 -->
-                        <tr>
-                            <td>
-                                <img src="{{ asset('assets/icons/music-note-beamed.svg') }}" class="me-2" alt="Icon">
-                                Spotify
-                            </td>
-                            <td>
-                                <select class="form-select form-select-sm w-auto">
-                                    <option value="paid" {{ (isset($status) && $status == 'paid') ? 'selected' : '' }}>PAID</option>
-                                    <option value="unpaid" {{ (isset($status) && $status == 'unpaid') ? 'selected' : '' }}>UNPAID</option>
-                                </select>
-                            </td>
-                            <td><strong>IDR 13,000</strong></td>
-                            <td>Every 16th day</td>
-                            <td>02 day(s) 14 hour(s)</td>
-                            <td class="text-center">
-                                <button class="btn btn-sm btn-outline-danger me-1 text-danger">
-                                    <img src="{{ asset('assets/icons/trash.svg') }}" alt="Icon">
-                                </button>
-                                <button class="btn btn-sm btn-outline-secondary me-1">
-                                    <img src="{{ asset('assets/icons/pencil.svg') }}" alt="Icon">
-                                </button>
-                                <button class="btn btn-sm btn-outline-success">
-                                    <img src="{{ asset('assets/icons/check.svg') }}" alt="Icon">
-                                </button>
-                            </td>
-                        </tr>
-
-                        <!-- Row 2 -->
-                        <tr>
-                            <td>
-                                <img src="{{ asset('assets/icons/music-note-beamed.svg') }}" class="me-2" alt="Icon">
-                                Spotify
-                            </td>
-                            <td>
-                                <select class="form-select form-select-sm w-auto">
-                                    <option value="paid" {{ (isset($status) && $status == 'paid') ? 'selected' : '' }}>PAID</option>
-                                    <option value="unpaid" {{ (isset($status) && $status == 'unpaid') ? 'selected' : '' }}>UNPAID</option>
-                                </select>
-                            </td>
-                            <td><strong>IDR 13,000</strong></td>
-                            <td>Every 16th day</td>
-                            <td>02 day(s) 14 hour(s)</td>
-                            <td class="text-center">
-                                <button class="btn btn-sm btn-outline-danger me-1 text-danger">
-                                    <img src="{{ asset('assets/icons/trash.svg') }}" alt="Icon">
-                                </button>
-                                <button class="btn btn-sm btn-outline-secondary me-1">
-                                    <img src="{{ asset('assets/icons/pencil.svg') }}" alt="Icon">
-                                </button>
-                                <button class="btn btn-sm btn-outline-success">
-                                    <img src="{{ asset('assets/icons/check.svg') }}" alt="Icon">
-                                </button>
-                            </td>
-                        </tr>
-
-                        <!-- Row 3 (Editable) -->
+                        <!-- Example Row -->
                         <tr>
                             <td>
                                 <img src="{{ asset('assets/icons/music-note-beamed.svg') }}" class="me-2" alt="Icon">
                                 <span>Spotify</span>
                             </td>
                             <td>
-                                <select class="form-select form-select-sm w-auto">
-                                    <option value="paid" {{ (isset($status) && $status == 'paid') ? 'selected' : '' }}>PAID</option>
-                                    <option value="unpaid" {{ (isset($status) && $status == 'unpaid') ? 'selected' : '' }}>UNPAID</option>
+                                <select class="form-select form-select-sm w-auto" disabled>
+                                    <option value="paid">PAID</option>
+                                    <option value="unpaid">UNPAID</option>
                                 </select>
                             </td>
                             <td>
-                                <input type="text" class="form-control form-control-sm" value="IDR 13,000">
+                                <input type="text" class="form-control form-control-sm" value="IDR 13,000" disabled>
                             </td>
                             <td>
-                                <select class="form-select form-select-sm w-auto">
+                                <select class="form-select form-select-sm w-auto" disabled>
                                     @for ($i = 1; $i <= 31; $i++)
                                         <option value="{{ $i }}" {{ $i == 16 ? 'selected' : '' }}>{{ $i }}</option>
                                     @endfor
@@ -109,10 +53,45 @@
                                 <button class="btn btn-sm btn-outline-danger me-1 text-danger">
                                     <img src="{{ asset('assets/icons/trash.svg') }}" alt="Icon">
                                 </button>
-                                <button class="btn btn-sm btn-outline-secondary me-1">
+                                <button class="btn btn-sm btn-outline-secondary me-1 edit-btn">
                                     <img src="{{ asset('assets/icons/pencil.svg') }}" alt="Icon">
                                 </button>
-                                <button class="btn btn-sm btn-outline-success">
+                                <button class="btn btn-sm btn-outline-success d-none save-btn">
+                                    <img src="{{ asset('assets/icons/check.svg') }}" alt="Icon">
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Repeat for other rows -->
+                        <tr>
+                            <td>
+                                <img src="{{ asset('assets/icons/music-note-beamed.svg') }}" class="me-2" alt="Icon">
+                                <span>Spotify</span>
+                            </td>
+                            <td>
+                                <select class="form-select form-select-sm w-auto" disabled>
+                                    <option value="paid">PAID</option>
+                                    <option value="unpaid">UNPAID</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control form-control-sm" value="IDR 13,000" disabled>
+                            </td>
+                            <td>
+                                <select class="form-select form-select-sm w-auto" disabled>
+                                    @for ($i = 1; $i <= 31; $i++)
+                                        <option value="{{ $i }}" {{ $i == 16 ? 'selected' : '' }}>{{ $i }}</option>
+                                    @endfor
+                                </select>
+                            </td>
+                            <td>02 day(s) 14 hour(s)</td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-outline-danger me-1 text-danger">
+                                    <img src="{{ asset('assets/icons/trash.svg') }}" alt="Icon">
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary me-1 edit-btn">
+                                    <img src="{{ asset('assets/icons/pencil.svg') }}" alt="Icon">
+                                </button>
+                                <button class="btn btn-sm btn-outline-success d-none save-btn">
                                     <img src="{{ asset('assets/icons/check.svg') }}" alt="Icon">
                                 </button>
                             </td>
@@ -123,4 +102,25 @@
         </div>
     </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('tr').forEach(function(row) {
+        const editBtn = row.querySelector('.edit-btn');
+        const saveBtn = row.querySelector('.save-btn');
+        if (editBtn && saveBtn) {
+            editBtn.addEventListener('click', function() {
+                row.querySelectorAll('select, input').forEach(el => el.disabled = false);
+                editBtn.classList.add('d-none');
+                saveBtn.classList.remove('d-none');
+            });
+            saveBtn.addEventListener('click', function() {
+                row.querySelectorAll('select, input').forEach(el => el.disabled = true);
+                saveBtn.classList.add('d-none');
+                editBtn.classList.remove('d-none');
+                // Optionally, submit data via AJAX here
+            });
+        }
+    });
+});
+</script>
 @endsection
