@@ -2,20 +2,20 @@
 @section('title', 'Regular Payment')
 @section('content')
 <div class="container mt-5">
-    <div class="d-flex justify-content-end mb-4">
+    <div class="d-flex justify-content-end mb-4 me-5">
         <a href="/newregularpayment">
-            <button class="btn btn-primary rounded-pill px-4">
+            <button class="btn btn-primary rounded-pill px-4" style="background-color: rgb(0, 92, 171)">
             + New Regular Payment
         </button>
         </a>
     </div>
 
-    <div class="card shadow-sm" style="border-radius: 1rem; width: 90%;">
+    <div class="card shadow-sm ms-5" style="border-radius: 1rem; width: 90%;">
         <div class="card-body">
-            <h4 class="card-title mb-4">Regular Payment</h4>
+            <h4 class="card-title mb-4 ms-1">Regular Payment</h4>
             <div class="table-responsive">
                 <table class="table align-middle">
-                    <thead class="table-light">
+                    <thead>
                         <tr>
                             <th>Transaction</th>
                             <th>Status</th>
@@ -33,9 +33,9 @@
                                 <span>Spotify</span>
                             </td>
                             <td>
-                                <select class="form-select form-select-sm w-auto" disabled>
-                                    <option value="paid">PAID</option>
-                                    <option value="unpaid">UNPAID</option>
+                                <select class="form-select form-select-sm w-auto status-select rounded-4">
+                                    <option value="paid" style="background-color:rgb(11, 136, 0)">PAID</option>
+                                    <option value="unpaid" style="background-color:rgb(213, 0, 0)">UNPAID</option>
                                 </select>
                             </td>
                             <td>
@@ -68,9 +68,9 @@
                                 <span>Spotify</span>
                             </td>
                             <td>
-                                <select class="form-select form-select-sm w-auto" disabled>
-                                    <option value="paid">PAID</option>
-                                    <option value="unpaid">UNPAID</option>
+                                <select class="form-select form-select-sm w-auto status-select rounded-4">
+                                    <option value="paid" style="background-color:rgb(11, 136, 0)">PAID</option>
+                                    <option value="unpaid" style="background-color: rgb(213, 0, 0)">UNPAID</option>
                                 </select>
                             </td>
                             <td>
@@ -104,6 +104,29 @@
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Function to set background color based on value
+    function updateStatusSelectBg(select) {
+        if (select.value === 'paid') {
+            select.style.backgroundColor = 'rgb(11, 136, 0)';
+            select.style.color = 'white';
+        } else if (select.value === 'unpaid') {
+            select.style.backgroundColor = 'rgb(213, 0, 0)';
+            select.style.color = 'white';
+        } else {
+            select.style.backgroundColor = '';
+            select.style.color = '';
+        }
+    }
+
+    // Initialize all status-select backgrounds
+    document.querySelectorAll('.status-select').forEach(function(select) {
+        updateStatusSelectBg(select);
+        select.addEventListener('change', function() {
+            updateStatusSelectBg(this);
+        });
+    });
+
+    // Existing edit/save logic
     document.querySelectorAll('tr').forEach(function(row) {
         const editBtn = row.querySelector('.edit-btn');
         const saveBtn = row.querySelector('.save-btn');
@@ -117,7 +140,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 row.querySelectorAll('select, input').forEach(el => el.disabled = true);
                 saveBtn.classList.add('d-none');
                 editBtn.classList.remove('d-none');
-                // Optionally, submit data via AJAX here
             });
         }
     });

@@ -1,12 +1,12 @@
 @extends('layout.template')
 @section('title', 'New Regular Payment')
 @section('content')
-<div class="container mt-5" style="max-width: 700px;">
+<div class="container mt-5 ms-5" style="max-width: 700px;">
     <div class="d-flex align-items-center mb-4">
         <a href="{{ url()->previous() }}" class="me-3 text-decoration-none text-primary fs-4">
             &#8592;
         </a>
-        <h4 class="text-primary m-0">New Regular Payment</h4>
+        <h4 class="m-0" style="color: rgb(0, 92, 171)">New Regular Payment</h4>
     </div>
 
     <div class="card border-0 shadow-sm p-4">
@@ -43,7 +43,7 @@
             </div>
 
             <div class="mt-4">
-                <button type="submit" class="btn btn-primary px-4 py-2 rounded-pill">
+                <button type="submit" class="btn btn-primary px-4 py-2 rounded-pill" style="background-color: rgb(0, 92, 171)">
                     Add Regular Payment
                 </button>
             </div>
