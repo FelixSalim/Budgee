@@ -35,4 +35,12 @@ class PageController extends Controller
         // Logic for the categories page
         return view('newregularpayment');
     }
+    public function profile()
+    {
+        return view('profile');
+    }
+    public function login()
+    {
+        return view('log-in');
+    }
 }
