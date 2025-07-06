@@ -7,7 +7,7 @@
         <a href="{{ route('goalslist') }}">
             <img src="{{ asset('assets/images/leftarrow.png') }}" alt="Back" class="back-arrow-img">
         </a>
-        <a class="page-title" href="">New Goal</a>
+        <a class="page-title" href="{{ route('goalslist') }}">New Goal</a>
     </div>
 
     {{-- FORM --}}
