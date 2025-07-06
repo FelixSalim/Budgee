@@ -10,12 +10,5 @@ Route::get('/regularpayment', [PageController::class, 'regularpayment'])->name('
 Route::get('/newregularpayment', [PageController::class, 'newregularpayment'])->name('newregularpayment');
 Route::get('/profile', [PageController::class, 'profile'])->name('profile');
 Route::get('/log-in', [PageController::class, 'login'])->name('login');
-
-
-Route::get('/goalist', function () {
-    return view('goalslist');
-});
-
-Route::get('/newgoals', function () {
-    return view('newgoals');
-});
+Route::get('/goalslist', [PageController::class, 'goalslist'])->name('goalslist');
+Route::get('/newgoals', [PageController::class, 'newgoals'])->name('newgoals');

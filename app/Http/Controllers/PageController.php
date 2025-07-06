@@ -43,4 +43,12 @@ class PageController extends Controller
     {
         return view('log-in');
     }
+    public function goalslist()
+    {
+        return view('goalslist');
+    }
+    public function newgoals()
+    {
+        return view('newgoals');
+    }
 }

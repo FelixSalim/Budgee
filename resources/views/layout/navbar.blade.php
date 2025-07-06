@@ -51,7 +51,7 @@
         </a>
     </li>
     <li>
-        <a href="/goals" class="nav-link {{ Request::is('goals') ? 'active' : 'link-dark' }}">
+        <a href="/goalslist" class="nav-link {{ Request::is('goalslist') ? 'active' : 'link-dark' }}">
             <svg class="bi me-2" width="24" height="24"><use xlink:href="{{ asset('assets/icons/bullseye.svg') }}"></use></svg>
             Goals
         </a>
