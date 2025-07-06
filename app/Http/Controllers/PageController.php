@@ -19,6 +19,12 @@ class PageController extends Controller
         // Logic for the categories page
         return view('categories');
     }
+
+    public function newcategory()
+    {
+        // Logic for the new category page
+        return view('newcategory');
+    }
     public function regularpayment()
     {
         // Logic for the categories page
@@ -28,5 +34,13 @@ class PageController extends Controller
     {
         // Logic for the categories page
         return view('newregularpayment');
+    }
+    public function profile()
+    {
+        return view('profile');
+    }
+    public function login()
+    {
+        return view('log-in');
     }
 }

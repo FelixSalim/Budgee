@@ -21,7 +21,7 @@
 </head>
 <body class="min-vh-100 d-flex flex-column m-0 p-0">
     <div class="row m-0 p-0 min-vh-100 w-100">
-        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light m-0 sidebar-app">
+        <div class="d-flex flex-column flex-shrink-0 p-3 m-0 sidebar-app" style="background-color: rgb(229, 244, 251);">
             @include('layout.navbar')
         </div>
         <div class="col">
@@ -30,6 +30,7 @@
             </main>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     @yield('extra-script')
 </body>

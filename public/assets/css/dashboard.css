@@ -1,7 +1,7 @@
 .dashboard-title {
     color: #005CAB;
-    font-weight: medium;
-    font-size: 1.9rem;
+    font-weight: 500;
+    font-size: 1.8rem;
 }
 
 .dashboard-subtitle {
@@ -25,4 +25,186 @@
     width: 3rem;
     height: 3rem;
     background-color: #D9D9D9;
+}
+
+.balance-title, .transaction-history-title, .category-title {
+    color: #3C3C3B;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.balance {
+    color: #263238;
+    font-weight: 500;
+    font-size: 2.2rem;
+}
+
+.add-button {
+    background-color: #005CAB;
+    color: white;
+    font-weight: 400;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.7rem;
+}
+
+.add-button:hover {
+    background-color: #005CAB;
+    color: white;
+    transform: scale(1.1);
+    transition: 0.3s ease-in-out;
+}
+
+.month-dropdown {
+    color: #767676;
+    font-size: 0.9rem;
+    border: black 0.5px solid;
+    padding: 0.5rem 0.7rem;
+}
+
+.month-dropdown:hover {
+    color: #767676;
+    border: black 0.5px solid;
+}
+
+.balance-container, .transaction-history-container {
+    border: black 0.5px solid;
+    border-radius: 20px;
+}
+
+.income-container, .expense-container { 
+    border: black 0.5px solid;
+    border-radius: 15px;
+    padding: 1rem;
+}
+
+.income-title, .expense-title {
+    color: #3C3C3B;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.income, .expense {
+    color: #263238;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+thead th {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+tbody td {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.table-head th {
+    background-color: #E5F4FB !important;
+}
+
+.table-head th:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.table-head th:last-child {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+table thead tr th, table tbody tr td {
+    vertical-align: middle;
+    height: 3rem;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+}
+
+
+.food-icon {
+    background-color: #AA9900;
+}
+
+.paycheck-icon {
+    background-color: #60AA00;
+}
+
+.groceries-icon {
+    background-color: #AA007D;
+}
+
+.education-icon {
+    background-color: #4F00AA;
+}
+
+.amount-decrease {
+    color: #D96859 !important;
+}
+
+.amount-increase {
+    color: #0EAC00 !important;
+}
+
+.category-title-container {
+    border-bottom: black 0.5px solid;
+    border-radius: 20px;
+    padding: 1.3rem;
+}
+
+.category-container {
+    border-radius: 20px;
+    border: black 0.5px solid;
+}
+
+a {
+    color: #767676;
+    text-decoration: none;
+}
+
+.active-selector {
+    color: #005CAB;
+    text-decoration: underline;
+}
+
+.month-category {
+    color: #767676;
+    font-size: 0.9rem;
+    text-decoration: underline;
+}
+
+.total {
+    color: #263238;
+    font-weight: 500;
+    font-size: 2.2rem;
+    text-align: center;
+    line-height: 90%;
+}
+
+.total-title {
+    color: #767676;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.legends p {
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+.legend-items p:first {
+    width: 30%;
+}
+
+.legend-items p:not(:first):not(:last-child) {
+    width: 20%;
+}
+
+.legend-items p:last-child {
+    width: 30%;
 }
