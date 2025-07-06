@@ -1,0 +1,108 @@
+.custom-input {
+    border: none;
+    border-bottom: 2px solid #005CAB;
+    border-radius: 0;
+    font-size: 1.1rem;
+    width: 100%;
+    outline: none;
+    font-weight: 400;
+    color: #005CAB;
+}
+
+.text-primary {
+    color: #005CAB !important;
+    font-size: 1.5rem;
+}
+input[type='radio'] {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+input[type='radio']:checked {
+    background-color: #005CAB;
+}
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 15%);
+    gap: 2.5rem;
+}
+.category-box {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.category-box:nth-child(1) .category-label { color: #AA007D; } /* Groceries */
+.category-box:nth-child(2) .category-label { color: #60AA00; } /* Health */
+.category-box:nth-child(3) .category-label { color: #AA9900; } /* Food */
+.category-box:nth-child(4) .category-label { color: #4F00AA; } /* Education */
+.category-box:nth-child(5) .category-label { color: #AA0000; } /* Present */
+.category-box:nth-child(6) .category-label { color: #767676; } /* New Category */
+.category-box:hover {
+    transform: scale(1.05);
+}
+.category-box img {
+    margin-bottom: 0.7rem;
+}
+.category-label {
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: 400;
+    color: #005CAB;
+}
+a {
+    text-decoration: none;
+    color: #005CAB;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.top-bar h4 {
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: #005CAB;
+}
+.form-section label {
+    font-weight: 500;
+    color: #005CAB;
+    font-size: 1.5rem;
+}
+.form-check-label {
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: #005CAB;
+}
+
+.btn-today {
+    background-color: #005CAB;
+    color: white;
+    border-radius: 30px;
+    padding: 0.7rem 2.5rem;
+    border: none;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: #005CAB;
+    border: none;
+    font-size: 1.3rem !important;
+    font-weight: 400;
+    padding: 1rem 7rem;
+}
+
+.btn-primary:hover {
+    background-color: #005CAB;
+}

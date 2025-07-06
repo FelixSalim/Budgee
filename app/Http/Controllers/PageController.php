@@ -14,6 +14,12 @@ class PageController extends Controller
         return view('dashboard');
     }
 
+    public function newtransaction()
+    {
+        // Logic for the new transaction page
+        return view('newtransaction');
+    }
+
     public function categories()
     {
         // Logic for the categories page
