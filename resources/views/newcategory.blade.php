@@ -274,7 +274,7 @@
             <div class="mb-5">
                 <h2 class="section-heading">Color</h2>
                 <div class="chooser-container">
-                    {{-- DIUBAH: Menggunakan data-color dan ikon gambar --}}
+                    {{-- Menggunakan data-color dan ikon gambar --}}
                     <div class="color-swatch" data-color="#B9A400" style="background-color: #B9A400;">
                         <img src="{{ asset('assets/images/check.png') }}" class="check-icon" alt="Selected">
                     </div>
@@ -302,51 +302,132 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
 
-        // --- Elemen DOM ---
-        const categoryNameInput = document.getElementById('categoryName');
-        const previewNameSpan = document.getElementById('previewName');
-        const previewIcon = document.getElementById('previewIcon');
-        const iconBoxes = document.querySelectorAll('.icon-box');
-        const colorSwatches = document.querySelectorAll('.color-swatch');
+    // --- Elemen DOM ---
+    const categoryNameInput = document.getElementById('categoryName');
+    const previewNameSpan = document.getElementById('previewName');
+    const previewIcon = document.getElementById('previewIcon');
+    const iconBoxes = document.querySelectorAll('.icon-box');
+    const colorSwatches = document.querySelectorAll('.color-swatch');
 
-        // --- FUNGSI UNTUK MENGUBAH NAMA PREVIEW ---
-        categoryNameInput.addEventListener('input', function() {
-            const newName = categoryNameInput.value;
-            previewNameSpan.textContent = newName ? newName : 'Category';
-        });
+    // --- Mapping untuk Ikon dan Warna ---
+    const iconColorMap = {
+        'foodbw': {
+            '#B9A400': 'food.png',        // Yellow
+            '#6C00AA': 'foodpurple.png',   // Purple
+            '#3B9201': 'foodgreen.png',    // Green
+            '#AA0000': 'foodred.png',      // Red
+            '#AA007D': 'foodpink.png'      // Pink
+        },
+        'presentbw': {
+            '#AA0000': 'present.png',     // Red
+            '#B9A400': 'presentyellow.png',// Yellow
+            '#3B9201': 'presentgreen.png', // Green
+            '#AA007D': 'presentpink.png',  // Pink
+            '#6C00AA': 'presentpurple.png'// Purple
+        },
+        'healthbw': {
+            '#3B9201': 'health.png',       // Green
+            '#B9A400': 'healthyellow.png', // Yellow
+            '#AA007D': 'healthpink.png',   // Pink
+            '#6C00AA': 'healthpurple.png', // Purple
+            '#AA0000': 'healthred.png'     // Red
+        },
+        'paycheckbw': {
+            '#3B9201': 'paycheck.png',     // Green
+            '#B9A400': 'paycheckyellow.png',// Yellow
+            '#AA007D': 'paycheckpink.png', // Pink
+            '#6C00AA': 'paycheckpurple.png',// Purple
+            '#AA0000': 'paycheckred.png'  // Red
+        },
+        'edubw': {
+            '#6C00AA': 'edu.png',          // Purple
+            '#AA007D': 'edupink.png',      // Pink
+            '#3B9201': 'edugreen.png',     // Green
+            '#AA0000': 'edured.png',       // Red
+            '#B9A400': 'eduyellow.png'     // Yellow
+        },
+        'groceriesbw': {
+            '#AA007D': 'groceries.png',    // Pink
+            '#B9A400': 'groceriesyellow.png',// Yellow
+            '#3B9201': 'groceriesgreen.png',// Green
+            '#6C00AA': 'groceriespurple.png',// Purple
+            '#AA0000': 'groceriesred.png'  // Red
+        },
+        'intbw': {
+            '#B9A400': 'int.png',          // Yellow
+            '#AA0000': 'intred.png',        // Red
+            '#3B9201': 'intgreen.png',      // Green
+            '#AA007D': 'intpink.png',       // Pink
+            '#6C00AA': 'intpurple.png'     // Purple
+        }
+    };
 
-        // --- FUNGSI UNTUK MEMILIH IKON ---
-        iconBoxes.forEach(box => {
-            box.addEventListener('click', function() {
-                // Hapus kelas 'active' dari semua ikon
-                iconBoxes.forEach(b => b.classList.remove('active'));
-                // Tambahkan kelas 'active' ke ikon yang diklik
-                this.classList.add('active');
-                // Ubah gambar di preview
-                const newIconSrc = this.dataset.iconSrc;
-                if (newIconSrc) {
-                    previewIcon.src = newIconSrc;
-                }
-            });
-        });
+    // --- FUNGSI UNTUK MEMPERBARUI PREVIEW SECARA KESELURUHAN ---
+    function updatePreview() {
+        const activeIconBox = document.querySelector('.icon-box.active');
+        const activeColorSwatch = document.querySelector('.color-swatch.active');
 
-        // --- FUNGSI UNTUK MEMILIH WARNA ---
-        colorSwatches.forEach(swatch => {
-            swatch.addEventListener('click', function() {
-                // Hapus kelas 'active' dari semua warna
-                colorSwatches.forEach(s => s.classList.remove('active'));
-                // Tambahkan kelas 'active' ke warna yang diklik
-                this.classList.add('active');
-                // Ubah warna teks di preview menggunakan data-color
-                const newColor = this.dataset.color;
-                if (newColor) {
-                    previewNameSpan.style.color = newColor;
-                }
-            });
+        if (!activeIconBox || !activeColorSwatch) return;
+
+        // Dapatkan path dasar untuk folder gambar dari data attribute ikon manapun
+        const baseIconSrc = activeIconBox.dataset.iconSrc;
+        const pathParts = baseIconSrc.split('/');
+        pathParts.pop(); // Hapus nama file saat ini
+        const imageBasePath = pathParts.join('/');
+
+        // Dapatkan kunci untuk ikon (nama file tanpa ekstensi) dan warna (kode hex)
+        const iconKey = baseIconSrc.split('/').pop().replace('.png', '');
+        const colorKey = activeColorSwatch.dataset.color;
+
+        // 1. Perbarui warna teks pada preview
+        previewNameSpan.style.color = colorKey;
+
+        // 2. Cari nama file ikon baru dari map berdasarkan kombinasi ikon dan warna
+        const newIconFilename = iconColorMap[iconKey]?.[colorKey];
+
+        if (newIconFilename) {
+            // Jika kombinasi ditemukan, ganti sumber gambar preview
+            previewIcon.src = `${imageBasePath}/${newIconFilename}`;
+        } else {
+            // Fallback: jika kombinasi tidak ditemukan (seharusnya tidak terjadi), gunakan ikon hitam putih
+            previewIcon.src = baseIconSrc;
+        }
+    }
+
+    // --- EVENT LISTENER UNTUK NAMA KATEGORI ---
+    categoryNameInput.addEventListener('input', function() {
+        const newName = categoryNameInput.value;
+        previewNameSpan.textContent = newName ? newName : 'Category';
+    });
+
+    // --- EVENT LISTENER UNTUK PEMILIHAN IKON ---
+    iconBoxes.forEach(box => {
+        box.addEventListener('click', function() {
+            // Kelola kelas 'active'
+            iconBoxes.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            // Panggil fungsi update gabungan
+            updatePreview();
         });
     });
+
+    // --- EVENT LISTENER UNTUK PEMILIHAN WARNA ---
+    colorSwatches.forEach(swatch => {
+        swatch.addEventListener('click', function() {
+            // Kelola kelas 'active'
+            colorSwatches.forEach(s => s.classList.remove('active'));
+            this.classList.add('active');
+            // Panggil fungsi update gabungan
+            updatePreview();
+        });
+    });
+
+    // Panggil updatePreview() saat halaman pertama kali dimuat.
+    // Ini untuk memastikan preview sesuai dengan state 'active' awal dari HTML.
+    updatePreview();
+});
 </script>
 
 @endsection
