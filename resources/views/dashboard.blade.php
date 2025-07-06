@@ -37,9 +37,11 @@
                     </div>
                     <div class="m-0 p-0 d-flex flex-row" style="width: auto;">
                         <div class="me-3 ms-0 my-0 p-0">
-                            <button class="btn add-button">
-                                + Add
-                            </button>
+                            <a href="{{ route('newtransaction') }}">
+                                <button class="btn add-button">
+                                    + Add
+                                </button>
+                            </a>
                         </div>
                         <div class="ms-2 me-0 my-0 p-0">
                             <div class="dropdown">
