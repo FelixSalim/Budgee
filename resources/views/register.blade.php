@@ -29,30 +29,39 @@
     </div>
 
     <div class="rounded-top-5 p-8 shadow-md mt-5 p-2" style="background-color: #E5F4FB;">
-        <h3 class="text-center fw-bold p-5">Log In To Your Account</h3>
+        <h3 class="text-center fw-bold p-5">Create New Account</h3>
 
         <div class="d-flex justify-content-center mb-5">
             <div class="d-flex flex-column gap-3" style="width:30%">
+                <input class="form-control form-control-lg" type="text" placeholder="E-mail">
                 <input class="form-control form-control-lg" type="text" placeholder="Username">
                 <input class="form-control form-control-lg" type="text" placeholder="Password">
+                <input class="form-control form-control-lg" type="text" placeholder="Confirm Password">
+
+                <div class="btn-group">
+                    <button class="btn dropdown-toggle bg-white" type="button" data-bs-toggle="dropdown"
+                        data-bs-auto-close="true" aria-expanded="false">
+                        Choose Currency
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">USD</a></li>
+                        <li><a class="dropdown-item" href="#">Rp</a></li>
+                        <li><a class="dropdown-item" href="#">JPY</a></li>
+                        <li><a class="dropdown-item" href="#">CNY</a></li>
+                        <li><a class="dropdown-item" href="#">KRW</a></li>
+                    </ul>
+                </div>
 
                 <div class="form-check d-flex justify-content-center gap-2">
                     <input class="form-check-input" type="checkbox" value="" id="checkDefault">
                     <label class="form-check-label" for="checkDefault">
-                        Remember Me
+                        I agree to the terms and conditions
                     </label>
                 </div>
 
-                <div class="d-grid gap-2 col-6 mx-auto mt-3 mb-5" style="width:100%">
+                <div class="d-grid gap-2 col-6 mx-auto mt-3" style="width:100%">
                     <a href="{{ route('home') }}">
-                        <button type="button" class="btn text-white w-100" style="background-color: #005CAB;">Log In
-                        </button>
-                    </a>
-
-                    <a href="{{ route('register') }}">
-                        <button type="button" class="btn text-white w-100" style="background-color: #005CAB;">Register a
-                            New
-                            Account
+                        <button type="button" class="btn text-white w-100" style="background-color: #005CAB;">Register
                         </button>
                     </a>
                 </div>

@@ -13,3 +13,4 @@ Route::get('/profile', [PageController::class, 'profile'])->name('profile');
 Route::get('/log-in', [PageController::class, 'login'])->name('login');
 Route::get('/goalslist', [PageController::class, 'goalslist'])->name('goalslist');
 Route::get('/newgoals', [PageController::class, 'newgoals'])->name('newgoals');
+Route::get('/register', [PageController::class, 'register'])->name('register');

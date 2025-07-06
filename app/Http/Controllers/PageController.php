@@ -57,4 +57,8 @@ class PageController extends Controller
     {
         return view('newgoals');
     }
+    public function register()
+    {
+        return view('register');
+    }
 }
