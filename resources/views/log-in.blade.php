@@ -31,6 +31,34 @@
     <div class="rounded-top-5 p-8 shadow-md mt-5 p-2" style="background-color: #E5F4FB;">
         <h3 class="text-center fw-bold p-5">Log In To Your Account</h3>
 
+        <div class="d-flex justify-content-center mb-5">
+            <div class="d-flex flex-column gap-3" style="width:30%">
+                <input class="form-control form-control-lg" type="text" placeholder="Username">
+                <input class="form-control form-control-lg" type="text" placeholder="Password">
+
+                <div class="form-check d-flex justify-content-center gap-2">
+                    <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                    <label class="form-check-label" for="checkDefault">
+                        Remember Me
+                    </label>
+                </div>
+
+                <div class="d-grid gap-2 col-6 mx-auto mt-3 mb-5" style="width:100%">
+                    <a href="{{ route('home') }}">
+                        <button type="button" class="btn text-white w-100" style="background-color: #005CAB;">Log In
+                        </button>
+                    </a>
+
+                    <a href="{{ route('home') }}">
+                        <button type="button" class="btn text-white w-100" style="background-color: #005CAB;">Register a
+                            New
+                            Account
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+        </div>
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
