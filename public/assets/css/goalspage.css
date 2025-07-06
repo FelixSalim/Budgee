@@ -1,0 +1,216 @@
+.total-saved {
+    border: 2px solid #767676;
+    box-shadow: 10 0px 0px rgba(0, 0, 0, 0.4);
+    border-radius: 20%;
+}
+
+.new-goal {
+    background-color: #005CAB;
+    color: white;
+    border-radius: 20px;
+    border: none;
+    font-size: 25;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 0.8%;
+    padding-bottom: 0.8%;
+}
+
+.bg-white {
+    border-radius: 20px;
+}
+
+.total-saved-title {
+    font-size: 20;
+    font-weight: 400;
+    color: #767676;
+}
+
+.money-saved-title {
+    font-size: 40;
+    font-weight: 700;
+}
+
+.card {
+    border-radius: 20px;
+}
+
+.money-goal {
+    font-size: 20;
+    font-weight: 700;
+}
+
+.money-saved {
+    font-size: 15;
+    font-weight: 700;
+}
+
+.saved-word {
+    font-weight: 400;
+    color: #3C3C3B;
+}
+
+.progress {
+    background-color: #D9D9D9;
+}
+
+.progress-bar {
+    background-color: #005CAB;
+}
+
+.card-date {
+    font-weight: 700;
+    font-size: 15;
+}
+
+.add-money-button {
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    background-color: #005CAB;
+    color: white;
+    border: none;
+    font-size: 8;
+    font-weight: 400;
+    border-radius: 20px;
+}
+
+/* Biar dropdown naik ke atas */
+.show-up {
+    top: auto !important;
+    bottom: 100%;
+    transform: translateY(-10px);
+    border-radius: 10px;
+    background-color: white;
+}
+
+.new-goal-text {
+    color: #005CAB;
+    font-size: 40;
+    font-weight: 500;
+}
+
+.input-title {
+    color: #005CAB;
+    font-size: 30;
+    font-weight: 400;
+}
+
+.input-box {
+    border: none;
+    border-bottom: 3px solid #005CAB;
+    border-radius: 1px;
+    box-shadow: none;
+    outline: none;
+    color: #767676;
+}
+
+.input-box:focus {
+    border-color: #005CAB;
+    box-shadow: none;
+}
+
+/* SUBMIT BUTTON*/
+
+.add-goal-btn {
+    background-color: #005CAB;
+    color: white;
+    border-radius: 20px;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border: none;
+    font-size: 22px;
+}
+
+/* Choose Icon */
+
+.icon-option {
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.icon-img {
+    width: 70px;
+    height: 75px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 6px;
+    transition: all 0.2s ease-in-out;
+}
+
+.icon-option input:checked+.icon-img {
+    border-color: #005CAB;
+}
+
+.add-icon-btn {
+    width: 50px;
+    height: 50px;
+}
+
+/* Choose Color */
+
+.color-option {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.color-option .checkmark {
+    color: white;
+    font-size: 18px;
+    display: none;
+}
+
+.color-option input:checked+.checkmark {
+    display: block;
+}
+
+.color-option input:checked~.checkmark {
+    display: block;
+}
+
+.color-option input:checked {
+    opacity: 1;
+}
+
+.color-option input:checked~.checkmark {
+    display: block;
+}
+
+.color-option input:checked+.checkmark {
+    display: block;
+}
+
+.color-option input:checked {
+    opacity: 1;
+}
+
+.color-option input {
+    position: absolute;
+}
+
+.add-color-btn {
+    width: 40px;
+    height: 40px;
+}
+
+/* DROPDOWN ADD MONEY */
+
+.show-up {
+    top: auto !important;
+    bottom: 100%;
+    transform: translateY(-10px);
+    border-radius: 8px;
+    min-width: 280px;
+    background-color: white;
+}
