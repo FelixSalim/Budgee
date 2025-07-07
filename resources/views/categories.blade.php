@@ -10,6 +10,7 @@
         font-family: 'DM Sans', sans-serif;
         color: #005CAB;
         font-weight: 500;
+        padding-left: 0;
     }
 
     .section-title a {
