@@ -11,7 +11,7 @@
         </a>
     </li>
     <li class="nav-item my-2">
-        <a href="/transaction" class="nav-link {{ Request::is('transaction') ? 'active' : 'link-dark' }}">
+        <a href="/transactions" class="nav-link {{ Request::is('transactions') ? 'active' : 'link-dark' }}">
             <svg class="bi me-2" width="24" height="24"><use width="24" height="24" xlink:href="{{ asset('assets/icons/arrow-left-right.svg') }}"></use></svg>
             Transaction
         </a>

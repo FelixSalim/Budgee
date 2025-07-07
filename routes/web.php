@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 
 Route::get('/', [PageController::class, 'index'])->name('home');
+Route::get('/transactions', [PageController::class, 'transactions'])->name('transactions');
 Route::get('/newtransaction', [PageController::class, 'newtransaction'])->name('newtransaction');
 Route::get('/categories', [PageController::class, 'categories'])->name('categories');
 Route::get('/newcategory', [PageController::class, 'newcategory'])->name('newcategory');
