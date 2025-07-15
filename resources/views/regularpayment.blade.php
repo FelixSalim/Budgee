@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <div class="d-flex mb-4 ms-5 me-5" style="justify-content: space-between; align-items: center; color: rgb(0, 92, 171);">
         <div class="d-flex justify-content-start align-items-center">
-            <h4 class="card-title">Regular Payment</h4>
+            <h2 class="card-title">Regular Payment</h2>
         </div>
         <div class="d-flex justify-content-end">
             <a href="/newregularpayment">
