@@ -2,17 +2,21 @@
 @section('title', 'Regular Payment')
 @section('content')
 <div class="container mt-5">
-    <div class="d-flex justify-content-end mb-4 me-5">
-        <a href="/newregularpayment">
-            <button class="btn btn-primary rounded-pill px-4" style="background-color: rgb(0, 92, 171)">
-            + New Regular Payment
-        </button>
-        </a>
+    <div class="d-flex mb-4 ms-5 me-5" style="justify-content: space-between; align-items: center; color: rgb(0, 92, 171);">
+        <div class="d-flex justify-content-start align-items-center">
+            <h4 class="card-title">Regular Payment</h4>
+        </div>
+        <div class="d-flex justify-content-end">
+            <a href="/newregularpayment">
+                <button class="btn btn-primary rounded-pill px-4" style="background-color: rgb(0, 92, 171)">
+                + New Regular Payment
+            </button>
+            </a>
+        </div>
     </div>
 
     <div class="card shadow-sm ms-5" style="border-radius: 1rem; width: 90%;">
         <div class="card-body">
-            <h4 class="card-title mb-4 ms-1">Regular Payment</h4>
             <div class="table-responsive">
                 <table class="table align-middle">
                     <thead>

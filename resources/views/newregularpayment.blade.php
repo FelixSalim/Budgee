@@ -3,8 +3,8 @@
 @section('content')
 <div class="container mt-5 ms-5" style="max-width: 700px;">
     <div class="d-flex align-items-center mb-4">
-        <a href="{{ url()->previous() }}" class="me-3 text-decoration-none text-primary fs-4">
-            &#8592;
+        <a href="{{ route('regularpayment') }}">
+            <img src="{{ asset('assets/images/leftarrow.png') }}" alt="Back" class="back-arrow-img me-4" style="width: 0.6rem; height: 1rem;">
         </a>
         <h4 class="m-0" style="color: rgb(0, 92, 171)">New Regular Payment</h4>
     </div>
