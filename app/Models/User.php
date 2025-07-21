@@ -34,6 +34,11 @@ class User extends Authenticatable
         return $this->hasMany(Goal::class);
     }
 
+    public function regularPayments()
+    {
+        return $this->hasMany(RegularPayment::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
