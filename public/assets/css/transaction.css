@@ -1,0 +1,124 @@
+.page-title {
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #005CAB;
+}
+
+.add-btn {
+    background-color: #005CAB;
+    color: white;
+    border: none;
+    padding: 0.7rem 2rem;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+.toggle-btn {
+    background-color: #005CAB;
+    color: white;
+    border: none;
+    padding: 6px 20px;
+    font-weight: 400;
+    border-radius: 8px 0 0 8px;
+}
+.toggle-btn.secondary {
+    background-color: white;
+    color: #005CAB;
+    border: 2px solid #005CAB;
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+}
+
+thead th {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+tbody td {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.table-head th {
+    background-color: #E5F4FB !important;
+}
+
+.table-head th:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.table-head th:last-child {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+table thead tr th, table tbody tr td {
+    vertical-align: middle;
+    height: 3rem;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+}
+
+
+.food-icon {
+    background-color: #AA9900;
+}
+
+.paycheck-icon {
+    background-color: #60AA00;
+}
+
+.groceries-icon {
+    background-color: #AA007D;
+}
+
+.education-icon {
+    background-color: #4F00AA;
+}
+
+.amount-decrease {
+    color: #D96859 !important;
+}
+
+.amount-increase {
+    color: #0EAC00 !important;
+}
+
+.transaction-history-title {
+    color: #3C3C3B;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.transaction-history-container {
+    border: black 0.5px solid;
+    border-radius: 20px;
+}
+
+.transaction-history-date {
+    font-weight: 400;
+    font-size: 1.1rem;
+}
+
+.month-dropdown {
+    color: #767676;
+    font-size: 0.9rem;
+    border: black 0.5px solid;
+    padding: 0.5rem 0.7rem;
+}
+
+.month-dropdown:hover {
+    color: #767676;
+    border: black 0.5px solid;
+}
+
+.total {
+    font-size: 1.1rem;
+}
