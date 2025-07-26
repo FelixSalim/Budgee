@@ -4,7 +4,7 @@
     <div class="container-fluid px-5 py-5">
         {{-- HEADER PAGE --}}
         <div class="d-flex justify-content-between align-items-center mb-5">
-            <h1 class="page-title">Goals</h1>
+            <h1 class="page-title-goal">Goals</h1>
             <a href="{{ route('newgoals') }}" class="btn btn-primary btn-new-goal text-white">
                 + New Goal
             </a>
