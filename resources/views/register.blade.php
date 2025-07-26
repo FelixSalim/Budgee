@@ -32,13 +32,16 @@
         <h3 class="text-center fw-bold p-5">Create New Account</h3>
 
         <div class="d-flex justify-content-center mb-5">
-            <div class="d-flex flex-column gap-3" style="width:30%">
-                <input class="form-control form-control-lg" type="text" placeholder="E-mail">
-                <input class="form-control form-control-lg" type="text" placeholder="Username">
-                <input class="form-control form-control-lg" type="text" placeholder="Password">
-                <input class="form-control form-control-lg" type="text" placeholder="Confirm Password">
+            {{-- <div class="d-flex flex-column gap-3" style="width:30%"> --}}
+            <form action="{{ route('auth.register') }}" method="POST" class="d-flex flex-column gap-3" style="width:30%">
+                @csrf
 
-                <div class="btn-group">
+                <input class="form-control form-control-lg" type="text" name="email" placeholder="E-mail" required>
+                <input class="form-control form-control-lg" type="text" name="username" placeholder="Username" required>
+                <input class="form-control form-control-lg" type="text" name="password" placeholder="Password">
+                <input class="form-control form-control-lg" type="text" name="password_confirmation" placeholder="Confirm Password">
+
+                {{-- <div class="btn-group">
                     <button class="btn dropdown-toggle bg-white" type="button" data-bs-toggle="dropdown"
                         data-bs-auto-close="true" aria-expanded="false">
                         Choose Currency
@@ -50,23 +53,46 @@
                         <li><a class="dropdown-item" href="#">CNY</a></li>
                         <li><a class="dropdown-item" href="#">KRW</a></li>
                     </ul>
-                </div>
+                </div> --}}
+                <select name="currency" class="form-select form-select-lg">
+                    <option value="" disabled selected>Choose Currency</option>
+                    <option value="USD">USD</option>
+                    <option value="IDR">Rp</option>
+                    <option value="JPY">JPY</option>
+                    <option value="CNY">CNY</option>
+                    <option value="KRW">KRW</option>
+                </select>
 
                 <div class="form-check d-flex justify-content-center gap-2">
-                    <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                    <input class="form-check-input" type="checkbox" name="agree" required id="checkDefault">
                     <label class="form-check-label" for="checkDefault">
                         I agree to the terms and conditions
                     </label>
                 </div>
 
                 <div class="d-grid gap-2 col-6 mx-auto mt-3" style="width:100%">
-                    <a href="{{ route('home') }}">
+                    {{-- <a href="{{ route('home') }}">
                         <button type="button" class="btn text-white w-100" style="background-color: #005CAB;">Register
                         </button>
-                    </a>
+                    </a> --}}
+                    <button type="submit" class="btn text-white w-100" style="background-color: #005CAB;">
+                        Register
+                    </button>
+                    @error('email')
+                        <small class="text-danger d-block">{{ $message }}</small>
+                    @enderror
+                    @error('username')
+                        <small class="text-danger d-block">{{ $message }}</small>
+                    @enderror
+                    @error('password')
+                        <small class="text-danger d-block">{{ $message }}</small>
+                    @enderror
+                    @error('password_confirmation')
+                        <small class="text-danger d-block">{{ $message }}</small>
+                    @enderror
                 </div>
 
-            </div>
+            </form>
         </div>
 
     </div>

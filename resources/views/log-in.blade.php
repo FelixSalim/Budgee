@@ -32,32 +32,38 @@
         <h3 class="text-center fw-bold p-5">Log In To Your Account</h3>
 
         <div class="d-flex justify-content-center mb-5">
-            <div class="d-flex flex-column gap-3" style="width:30%">
-                <input class="form-control form-control-lg" type="text" placeholder="Username">
-                <input class="form-control form-control-lg" type="text" placeholder="Password">
+            <form action="{{ route('auth.login') }}" method="POST" class="d-flex flex-column gap-3" style="width:30%">
+
+                @csrf
+
+                @if (session('error'))
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                <input class="form-control form-control-lg" type="text" name="username" placeholder="Username" required>
+                <input class="form-control form-control-lg" type="password" name="password" placeholder="Password" required>
 
                 <div class="form-check d-flex justify-content-center gap-2">
-                    <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                    <input class="form-check-input" type="checkbox" name="remember" id="checkDefault">
                     <label class="form-check-label" for="checkDefault">
                         Remember Me
                     </label>
                 </div>
 
                 <div class="d-grid gap-2 col-6 mx-auto mt-3 mb-5" style="width:100%">
-                    <a href="{{ route('home') }}">
-                        <button type="button" class="btn text-white w-100" style="background-color: #005CAB;">Log In
-                        </button>
-                    </a>
-
+                    <button type="submit" class="btn text-white w-100" style="background-color: #005CAB;">
+                        Log In
+                    </button>
                     <a href="{{ route('register') }}">
-                        <button type="button" class="btn text-white w-100" style="background-color: #005CAB;">Register a
-                            New
-                            Account
+                        <button type="button" class="btn text-white w-100" style="background-color: #005CAB;">
+                            Register a New Account
                         </button>
                     </a>
                 </div>
 
-            </div>
+            </form>
         </div>
 
     </div>

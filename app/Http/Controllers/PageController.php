@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -49,7 +51,8 @@ class PageController extends Controller
     }
     public function profile()
     {
-        return view('profile');
+        $user = Auth::user();
+        return view('profile', compact('user'));
     }
     public function login()
     {
@@ -66,5 +69,30 @@ class PageController extends Controller
     public function register()
     {
         return view('register');
+    }
+
+    public function updateProfile(Request $request) {
+        $user = Auth::user();
+
+        $request->validate([
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'username' => 'required|string|unique:users,username,' . $user->id,
+            'currency' => 'required',
+            'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        // update data
+        $user->email = $request->email;
+        $user->username = $request->username;
+        $user->currency = $request->currency;
+
+        // Upload profile picture jika ada
+        if ($request->hasFile('profile_picture')) {
+            $imagePath = $request->file('profile_picture')->store('profile_pictures', 'public');
+            $user->profile_picture = $imagePath;
+        }
+
+        $user->save();
+        return redirect()->back()->with('success', 'Profile updated successfully!');
     }
 }
