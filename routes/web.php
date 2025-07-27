@@ -32,9 +32,12 @@ Route::post('/', [AuthController::class, 'login'])->name('auth.login');
 
 
 Route::get('/profile', [PageController::class, 'profile'])->middleware('auth')->name('profile');
-Route::put('/profile', [PageController::class, 'updateProfile'])->name('profile.update')->middleware('auth');
-Route::post('/update-profile-picture', [AuthController::class, 'updateProfilePicture'])->name('user.updateProfilePicture');
+Route::put('/profile', [AuthController::class, 'update'])->name('profile.update')->middleware('auth');
+Route::post('/update-profile-picture', [AuthController::class, 'updateProfilePicture'])->middleware('auth')->name('user.updateProfilePicture');
 
-Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+// Auth::routes(); --> harus install laravel UI dlu
+// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
 
