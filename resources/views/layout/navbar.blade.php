@@ -5,7 +5,7 @@
 <hr>
 <ul class="nav nav-pills flex-column mb-auto">
     <li class="nav-item my-2">
-        <a href="/" class="nav-link {{ Request::is('/') ? 'active' : 'link-dark' }}" aria-current="page">
+        <a href="/dashboard" class="nav-link {{ Request::is('dashboard') ? 'active' : 'link-dark' }}" aria-current="page">
             <svg class="bi me-2" width="24" height="24"><use width="24" height="24" xlink:href="{{ asset('assets/icons/house-door-fill.svg') }}"></use></svg>
             Dashboard
         </a>

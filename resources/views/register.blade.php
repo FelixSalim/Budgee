@@ -57,7 +57,7 @@
                 <select name="currency" class="form-select form-select-lg">
                     <option value="" disabled selected>Choose Currency</option>
                     <option value="USD">USD</option>
-                    <option value="IDR">Rp</option>
+                    <option value="IDR">IDR</option>
                     <option value="JPY">JPY</option>
                     <option value="CNY">CNY</option>
                     <option value="KRW">KRW</option>
