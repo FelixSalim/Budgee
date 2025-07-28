@@ -27,7 +27,7 @@
     <div id="profile-view" class="d-flex justify-content-center mt-5">
         <div class="card gap-4 border border-0" style="width: 35%;">
             <ul class="list-group list-group-flush border border-secondary rounded shadow-sm">
-                <li class="list-group-item text-body-tertiary">E mail: <span>{{ $user->email }}</span></li>
+                <li class="list-group-item text-body-tertiary">Email: <span>{{ $user->email }}</span></li>
             </ul>
 
             <ul class="list-group list-group-flush border border-secondary rounded shadow-sm">

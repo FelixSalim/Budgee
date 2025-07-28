@@ -1,0 +1,67 @@
+    .page-title {
+        font-family: 'DM Sans', sans-serif;
+        color: #005CAB;
+        font-weight: 500;
+        padding-left: 0;
+    }
+
+    .section-title a {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: #005CAB;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    .section-title a:hover {
+        color: #005CAB;
+    }
+
+    .btn-new-category {
+        background-color: #005CAB;
+        border-color: #005CAB;
+        border-radius: 50px; /* pill corner radius */
+        padding: 5px 20px;
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 300;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    .btn-new-category:hover {
+        background-color: #005CAB;
+        border-color: #005CAB;
+    }
+
+    .category-card {
+        width: 180px;
+        height: 180px;
+        border: 2px solid #E0E0E0;
+        border-radius: 16px; /* card corner radius */
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 2rem;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .category-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .category-card img {
+        width: 80px;
+        height: 70px;
+        margin-bottom: 0.75rem;
+    }
+
+    .category-card {
+        font-family: 'DM Sans', sans-serif;
+        font-weight: 400;
+        margin: 0;
+        font-size: 1.2rem;
+    }

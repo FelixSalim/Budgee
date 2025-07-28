@@ -10,10 +10,12 @@ Route::get('/transactions', [PageController::class, 'transactions'])->middleware
 
 Route::get('/newtransaction', [PageController::class, 'newtransaction'])->middleware('auth')->name('newtransaction');
 
-Route::get('/categories', [PageController::class, 'categories'])->middleware('auth')->name('categories');
-
-Route::get('/newcategory', [PageController::class, 'newcategory'])->middleware('auth')->name('newcategory');
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/categories', [PageController::class, 'categories'])->name('categories');
+    Route::get('/categories/new', [PageController::class, 'newcategory'])->name('newcategory');
+    Route::post('/categories/store', [PageController::class, 'storeCategory'])->name('categories.store');
+    Route::delete('/categories/{id}/delete', [PageController::class, 'deleteCategory'])->name('categories.delete');
+});
 Route::get('/regularpayment', [PageController::class, 'regularpayment'])->middleware('auth')->name('regularpayment');
 
 Route::get('/newregularpayment', [PageController::class, 'newregularpayment'])->middleware('auth')->name('newregularpayment');
