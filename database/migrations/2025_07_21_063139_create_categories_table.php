@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->decimal('planned_outlay')->default(0.00);
+            $table->decimal('planned_outlay',15,2);
             $table->enum('type', ['income', 'expense'])->default('expense');
             $table->string('icon')->nullable();
             $table->string('icon_color')->default('#000000');
@@ -32,3 +32,5 @@ return new class extends Migration
         Schema::dropIfExists('categories');
     }
 };
+
+

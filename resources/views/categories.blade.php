@@ -27,15 +27,19 @@
             </div>
             <div class="d-flex flex-wrap gap-3">
                 @forelse($expenses as $category)
-                    <div class="category-card position-relative">
-                        <img src="{{ asset('assets/images/' . $category->icon) }}" alt="{{ $category->name }} Icon">
-                        <span class="category-name" style="color: {{ $category->icon_color }}">{{ $category->name }}</span>
-                        <form action="{{ route('categories.delete', $category->id) }}" method="POST" class="position-absolute top-0 end-0 m-2">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger px-2 py-0" onclick="return confirm('Are you sure?')">×</button>
-                        </form>
-                    </div>
+                    {{-- Wrap the category card with an anchor tag --}}
+                    <a href="{{ route('categories.edit', $category->id) }}" class="text-decoration-none text-dark">
+                        <div class="category-card position-relative">
+                            <img src="{{ asset('assets/images/' . $category->icon) }}" alt="{{ $category->name }} Icon">
+                            <span class="category-name" style="color: {{ $category->icon_color }}">{{ $category->name }}</span>
+                            {{-- Delete form (keep it as is for now, it's positioned absolutely) --}}
+                            <form action="{{ route('categories.delete', $category->id) }}" method="POST" class="position-absolute top-0 end-0 m-2" onclick="event.stopPropagation();">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger px-2 py-0" onclick="return confirm('Are you sure you want to delete this category?')">×</button>
+                            </form>
+                        </div>
+                    </a>
                 @empty
                     <p class="text-muted">No expense categories yet.</p>
                 @endforelse
@@ -49,15 +53,19 @@
             </div>
             <div class="d-flex flex-wrap gap-3">
                 @forelse($income as $category)
-                    <div class="category-card position-relative">
-                        <img src="{{ asset('assets/images/' . $category->icon) }}" alt="{{ $category->name }} Icon">
-                        <span class="category-name" style="color: {{ $category->icon_color }}">{{ $category->name }}</span>
-                        <form action="{{ route('categories.delete', $category->id) }}" method="POST" class="position-absolute top-0 end-0 m-2">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger px-2 py-0" onclick="return confirm('Are you sure?')">×</button>
-                        </form>
-                    </div>
+                    {{-- Wrap the category card with an anchor tag --}}
+                    <a href="{{ route('categories.edit', $category->id) }}" class="text-decoration-none text-dark">
+                        <div class="category-card position-relative">
+                            <img src="{{ asset('assets/images/' . $category->icon) }}" alt="{{ $category->name }} Icon">
+                            <span class="category-name" style="color: {{ $category->icon_color }}">{{ $category->name }}</span>
+                            {{-- Delete form (keep it as is for now, it's positioned absolutely) --}}
+                            <form action="{{ route('categories.delete', $category->id) }}" method="POST" class="position-absolute top-0 end-0 m-2" onclick="event.stopPropagation();">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger px-2 py-0" onclick="return confirm('Are you sure you want to delete this category?')">×</button>
+                            </form>
+                        </div>
+                    </a>
                 @empty
                     <p class="text-muted">No income categories yet.</p>
                 @endforelse
@@ -66,3 +74,5 @@
     </div>
 </div>
 @endsection
+
+
