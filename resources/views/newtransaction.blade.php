@@ -13,8 +13,8 @@
         <form>
             <div class="mb-5">
                 <div class="d-flex align-items-center gap-3">
-                    <input type="text" class="custom-input w-25" placeholder="0">
-                    <span class="fw-medium text-primary">IDR</span>
+                    <input type="text" name="amount" class="custom-input w-25" placeholder="0">
+                    <span class="fw-medium text-primary">{{ Auth::user()->currency }}</span>
                     <div class="form-check form-check-inline mx-5 ps-5">
                         <input class="form-check-input me-2" type="radio" name="type" id="expense" value="expense" checked>
                         <label class="form-check-label" for="expense">Expenses</label>

@@ -79,7 +79,16 @@
                 </div>
             </div>
             <div class="row mt-4 mx-0 mb-0 p-4 transaction-history-container">
-                <h1 class="transaction-history-title h1 my-2 mx-0 p-0">Recent Cash Flow</h1>
+                <div class="d-flex justify-content-between align-items-center mb-3 ms-0 me-0 mt-0 p-0">
+                    <h1 class="transaction-history-title h1 my-2 mx-0 p-0">Recent Cash Flow</h1>
+                    <div class="m-0 p-0">
+                        <a href="{{ route('transactions') }}">
+                            <button class="btn see-more-button">
+                                See More
+                            </button>
+                        </a>
+                    </div>
+                </div>
                 <table class="table table-hover mt-3">
                     <thead class="table-head">
                         <tr>

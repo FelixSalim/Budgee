@@ -12,6 +12,7 @@ class Transaction extends Model
         'amount',
         'transaction_date',
         'description',
+        'type', // 'income' or 'expense'
     ];
 
     public function user()

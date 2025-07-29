@@ -54,6 +54,21 @@
     transition: 0.3s ease-in-out;
 }
 
+.see-more-button {
+    background-color: #005CAB;
+    color: white;
+    font-weight: 400;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.7rem;
+}
+
+.see-more-button:hover {
+    background-color: #005CAB;
+    color: white;
+    transform: scale(1.1);
+    transition: 0.3s ease-in-out;
+}
+
 .month-dropdown {
     color: #767676;
     font-size: 0.9rem;

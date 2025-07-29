@@ -20,7 +20,11 @@ class PageController extends Controller
     public function transactions()
     {
         // Logic for the transactions page
-        return view('transaction');
+        $user = Auth::user();
+        $expenses = $user->categories()->where('type', 'expense')->get();
+        $income = $user->categories()->where('type', 'income')->get();
+
+        return view('transaction', compact('expenses', 'income'));
     }
 
     public function newtransaction()
