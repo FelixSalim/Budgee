@@ -25,6 +25,8 @@ class RegularPaymentController extends Controller
             'transaction' => 'required|string|max:255',
             'amount' => 'required|numeric|min:0',
             'due_date' => 'required|integer|between:1,31',
+            'icon' => 'required|string|max:255',
+            'icon_color' => 'required|string|max:7', // e.g., #000000
         ]);
 
         RegularPayment::create([
@@ -32,13 +34,15 @@ class RegularPaymentController extends Controller
             'name' => $request->input('transaction'),
             'amount' => $request->input('amount'),
             'due_date' => $request->input('due_date'),
-            'status' => 'unpaid', // or other default
-            'icon' => 'music-note-beamed.svg', // optional, adjust if dynamic
-            'icon_color' => '#000000', // optional, adjust if dynamic
+            'status' => 'unpaid',
+            'icon' => $request->input('icon'),
+            'icon_color' => $request->input('icon_color'),
         ]);
 
         return redirect()->route('regularpayment')->with('success', 'Regular payment added.');
     }
+
+
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
@@ -56,5 +60,17 @@ class RegularPaymentController extends Controller
         ]);
 
         return response()->json(['success' => true]);
+    }
+
+    public function destroy($id)
+    {
+        try {
+            $payment = RegularPayment::findOrFail($id);
+            $payment->delete();
+
+            return response()->json(['success' => true, 'message' => 'Deleted successfully.']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Delete failed.']);
+        }
     }
 }

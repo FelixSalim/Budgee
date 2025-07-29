@@ -30,10 +30,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                    
                     @forelse($regularPayments as $payment)
                         <tr data-id="{{ $payment->id }}">
                             <td>
-                                <img src="{{ asset('assets/icons/' . $payment->icon) }}" class="me-2" alt="Icon">
+                                <img src="{{ asset('assets/images/' . $payment->icon) }}" class="me-2" alt="Icon" style="width: 1.5vw; height:1.5vh">
                                 <span>{{ $payment->name }}</span>
                             </td>
                             <td>
@@ -43,7 +44,7 @@
                                 </select>
                             </td>
                             <td>
-                                <input type="text" class="form-control form-control-sm" value="IDR {{ number_format($payment->amount, 0, ',', '.') }}" disabled>
+                                <input type="text" class="form-control form-control-sm" value="{{ Auth::user()->currency }} {{ number_format($payment->amount, 0, ',', '.') }}" disabled>
                             </td>
                             <td>
                                 <select class="form-select form-select-sm w-auto" disabled>
@@ -181,6 +182,35 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+    document.querySelectorAll('.btn-outline-danger').forEach(function(deleteBtn) {
+    deleteBtn.addEventListener('click', function() {
+        if (!confirm('Are you sure you want to delete this payment?')) return;
+
+        const row = this.closest('tr');
+        const paymentId = row.getAttribute('data-id');
+
+        fetch(`/regularpayment/${paymentId}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                row.remove(); // Remove row from table
+            } else {
+                alert('Failed to delete: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Delete error:', error);
+            alert('Failed to delete data. See console for details.');
+        });
+    });
+});
+
 });
 </script>
 @endsection

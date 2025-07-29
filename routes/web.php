@@ -47,7 +47,8 @@ Route::post('/', [AuthController::class, 'login'])->name('auth.login');
 Route::get('/regularpayment/new', [RegularPaymentController::class, 'create'])->name('regularpayment.create');
 Route::post('/regularpayment/store', [RegularPaymentController::class, 'store'])->name('regularpayment.store');
 Route::get('/regularpayment', [RegularPaymentController::class, 'index'])->name('regularpayment');
-Route::post('/regularpayment/update/{id}', [RegularPaymentController::class, 'update'])->name('regularpayment.update');
+Route::put('/regularpayment/update/{id}', [RegularPaymentController::class, 'update'])->name('regularpayment.update');
+Route::delete('/regularpayment/{id}', [RegularPaymentController::class, 'destroy'])->name('regularpayment.destroy');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/categories', [PageController::class, 'categories'])->name('categories');
