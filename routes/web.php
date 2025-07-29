@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RegularPaymentController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [PageController::class, 'index'])->name('home');
@@ -43,3 +44,8 @@ Route::post('/register', [AuthController::class, 'register'])->name('auth.regist
 
 Route::get('/', [PageController::class, 'login'])->name('login');
 Route::post('/', [AuthController::class, 'login'])->name('auth.login');
+
+Route::get('/regularpayment/new', [RegularPaymentController::class, 'create'])->name('regularpayment.create');
+Route::post('/regularpayment/store', [RegularPaymentController::class, 'store'])->name('regularpayment.store');
+Route::get('/regularpayment', [RegularPaymentController::class, 'index'])->name('regularpayment');
+Route::post('/regularpayment/update/{id}', [RegularPaymentController::class, 'update'])->name('regularpayment.update');

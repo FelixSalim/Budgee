@@ -10,7 +10,7 @@
     </div>
 
     <div class="card border-0 shadow-sm p-4">
-        <form action="" method="POST">
+        <form action="{{ route('regularpayment.store') }}" method="POST">
             @csrf
 
             <div class="row mb-4 align-items-center">

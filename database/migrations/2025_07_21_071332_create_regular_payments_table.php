@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->decimal('amount');
-            $table->date('due_date');
+            $table->integer('due_date');
             $table->enum('status', ['unpaid', 'paid'])->default('unpaid');
             $table->string('icon')->nullable();
             $table->string('icon_color')->default('#000000');
