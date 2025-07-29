@@ -19,7 +19,6 @@
 
     {{-- Local CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/goalspage.css') }}">
     @yield('extra-css')
 </head>
 <body class="min-vh-100 d-flex flex-column m-0 p-0">

@@ -36,10 +36,10 @@
             <form action="{{ route('auth.register') }}" method="POST" class="d-flex flex-column gap-3" style="width:30%">
                 @csrf
 
-                <input class="form-control form-control-lg" type="text" name="email" placeholder="E-mail" required>
+                <input class="form-control form-control-lg" type="email" name="email" placeholder="E-mail" required>
                 <input class="form-control form-control-lg" type="text" name="username" placeholder="Username" required>
-                <input class="form-control form-control-lg" type="text" name="password" placeholder="Password">
-                <input class="form-control form-control-lg" type="text" name="password_confirmation" placeholder="Confirm Password">
+                <input class="form-control form-control-lg" type="password" name="password" placeholder="Password">
+                <input class="form-control form-control-lg" type="password" name="password_confirmation" placeholder="Confirm Password">
 
                 {{-- <div class="btn-group">
                     <button class="btn dropdown-toggle bg-white" type="button" data-bs-toggle="dropdown"
