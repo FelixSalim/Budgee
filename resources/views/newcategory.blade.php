@@ -10,7 +10,7 @@
 
 <div class="container-fluid px-5 py-5">
     <div class="new-category-header">
-        <a href="{{ route('categories') }}">
+        <a href="{{ url()->previous() }}" class="back-arrow-link">
             <img src="{{ asset('assets/images/leftarrow.png') }}" alt="Back" class="back-arrow-img">
         </a>
         <a class="page-title" href="{{route('categories')}}">New Category</a>

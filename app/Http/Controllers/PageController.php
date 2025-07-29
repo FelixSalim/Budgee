@@ -17,16 +17,16 @@ class PageController extends Controller
 
     public function transactions()
     {
-        $user = Auth::user();
-        $expenses = $user->categories()->where('type', 'expense')->get();
-        $income = $user->categories()->where('type', 'income')->get();
-
-        return view('transaction', compact('expenses', 'income'));
+        return view('transaction');
     }
 
     public function newtransaction()
     {
-        return view('newtransaction');
+        $user = Auth::user();
+        $expenses = $user->categories()->where('type', 'expense')->get();
+        $income = $user->categories()->where('type', 'income')->get();
+
+        return view('newtransaction', compact('expenses', 'income'));
     }
 
         public function categories()

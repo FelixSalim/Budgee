@@ -40,20 +40,22 @@ input[type='radio']:checked {
     cursor: pointer;
     transition: transform 0.2s;
 }
-.category-box:nth-child(1) .category-label { color: #AA007D; } /* Groceries */
-.category-box:nth-child(2) .category-label { color: #60AA00; } /* Health */
-.category-box:nth-child(3) .category-label { color: #AA9900; } /* Food */
-.category-box:nth-child(4) .category-label { color: #4F00AA; } /* Education */
-.category-box:nth-child(5) .category-label { color: #AA0000; } /* Present */
-.category-box:nth-child(6) .category-label { color: #767676; } /* New Category */
+
 .category-box:hover {
     transform: scale(1.05);
 }
+
+.category-box.selected {
+    border: 2px solid #007bff; /* Blue highlight */
+    background-color: rgba(0, 123, 255, 0.1);
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.4);
+}
+
 .category-box img {
     margin-bottom: 0.7rem;
 }
 .category-label {
-    font-size: 0.9rem;
+    font-size: 1rem;
     text-align: center;
     font-weight: 400;
     color: #005CAB;
