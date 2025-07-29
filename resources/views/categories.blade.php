@@ -27,12 +27,10 @@
             </div>
             <div class="d-flex flex-wrap gap-3">
                 @forelse($expenses as $category)
-                    {{-- Wrap the category card with an anchor tag --}}
                     <a href="{{ route('categories.edit', $category->id) }}" class="text-decoration-none text-dark">
                         <div class="category-card position-relative">
                             <img src="{{ asset('assets/images/' . $category->icon) }}" alt="{{ $category->name }} Icon">
                             <span class="category-name" style="color: {{ $category->icon_color }}">{{ $category->name }}</span>
-                            {{-- Delete form (keep it as is for now, it's positioned absolutely) --}}
                             <form action="{{ route('categories.delete', $category->id) }}" method="POST" class="position-absolute top-0 end-0 m-2" onclick="event.stopPropagation();">
                                 @csrf
                                 @method('DELETE')
@@ -53,12 +51,10 @@
             </div>
             <div class="d-flex flex-wrap gap-3">
                 @forelse($income as $category)
-                    {{-- Wrap the category card with an anchor tag --}}
                     <a href="{{ route('categories.edit', $category->id) }}" class="text-decoration-none text-dark">
                         <div class="category-card position-relative">
                             <img src="{{ asset('assets/images/' . $category->icon) }}" alt="{{ $category->name }} Icon">
                             <span class="category-name" style="color: {{ $category->icon_color }}">{{ $category->name }}</span>
-                            {{-- Delete form (keep it as is for now, it's positioned absolutely) --}}
                             <form action="{{ route('categories.delete', $category->id) }}" method="POST" class="position-absolute top-0 end-0 m-2" onclick="event.stopPropagation();">
                                 @csrf
                                 @method('DELETE')
@@ -74,5 +70,3 @@
     </div>
 </div>
 @endsection
-
-

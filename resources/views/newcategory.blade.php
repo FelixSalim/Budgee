@@ -61,7 +61,7 @@
                                 <div class="text-danger mt-1">{{ $message }}</div>
                             @enderror
                         </div>
-                        <span class="info-text">IDR per month</span>
+                        <span class="info-text">{{ Auth::user()->currency ?? 'IDR' }} per month</span>
                     </div>
                 </div>
 
@@ -302,3 +302,4 @@
 });
 </script>
 @endsection
+

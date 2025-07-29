@@ -159,10 +159,6 @@ class PageController extends Controller
     }
 
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     public function regularpayment()
     {
         // Logic for the categories page
