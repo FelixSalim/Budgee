@@ -31,12 +31,6 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/regularpayment', [PageController::class, 'regularpayment'])->name('regularpayment');
-
-    Route::get('/newregularpayment', [PageController::class, 'newregularpayment'])->name('newregularpayment');
-});
-
-Route::middleware(['auth'])->group(function () {
     Route::get('/categories', [PageController::class, 'categories'])->name('categories');
     Route::get('/categories/new', [PageController::class, 'newcategory'])->name('newcategory');
     Route::post('/categories/store', [PageController::class, 'storeCategory'])->name('categories.store');
