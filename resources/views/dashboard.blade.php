@@ -147,25 +147,28 @@
         <div class="col-5">
             <div class="d-flex flex-column m-0 p-0 category-container">
                 <div class="row m-0 d-flex flex-row align-items-center justify-content-between category-title-container">
-                    {{-- Database --}}
-                    <div class="m-0 p-0" style="width: auto;">
-                        <h1 class="category-title m-0 p-0">
-                            Categories
+                    <div class="m-0 py-2 px-2" style="width: auto;">
+                        <h1 class="category-title m-0 py-1 px-0">
+                            Categories - {{ $months[$selectedMonthYear] ?? 'All Months' }}
                         </h1>
                     </div>
-                    <div class="m-0 p-0 d-flex flex-row" style="width: auto;">
-                        <div class="m-0 p-0">
+                    <div class="m-0 py-2 px-2" style="width: auto;">
+                        <form action="{{ route('home') }}" method="GET">
                             <div class="dropdown">
                                 <button class="btn dropdown-toggle month-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Month
+                                    {{ $months[$selectedMonthYear] ?? 'Month' }}
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    @foreach($months as $num => $name)
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('home', ['month' => $num]) }}">
+                                                {{ $name }}
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="row income-expense-selector d-flex justify-content-evenly my-3 mx-0 p-0">
@@ -176,11 +179,11 @@
                         <a href="#">Incomes</a>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center">
+                <div class="d-flex justify-content-center align-items-center mb-3">
                     <a href="#">
                         <img src="{{ asset('assets/icons/left-icon.png') }}" alt="">
                     </a>
-                    <p class="month-category">January</p>
+                    <p class="month-category m-0 p-0">January</p>
                     <a href="#">
                         <img src="{{ asset('assets/icons/right-icon.png') }}" alt="">
                     </a>
