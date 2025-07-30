@@ -178,21 +178,12 @@
                     <div class="col-3 d-flex justify-content-center align-items-center">
                         <a href="#">Incomes</a>
                     </div>
-                </div>
-                <div class="d-flex justify-content-center align-items-center mb-3">
-                    <a href="#">
-                        <img src="{{ asset('assets/icons/left-icon.png') }}" alt="">
-                    </a>
-                    <p class="month-category m-0 p-0">January</p>
-                    <a href="#">
-                        <img src="{{ asset('assets/icons/right-icon.png') }}" alt="">
-                    </a>
-                </div>
+                </div>  
                 <div class="d-flex justify-content-center align-items-center">
                     <canvas id="chart" class="m-0 p-0" width="250" height="250"></canvas>
                     <div class="position-absolute">
                         <p class="total m-0 p-0">
-                            IDR 1.3M
+                            {{ Auth::user()->currency }} {{ number_format($totalExpense, 0) }}
                         </p>
                         <p class="total-title m-0 p-0">
                             Total Expense
@@ -200,35 +191,91 @@
                     </div>
                 </div>
                 <div class="legends my-3 mx-0 px-5 py-0 d-flex flex-column">
-                    <div class="d-flex flex-row align-items-center justify-content-between mx-0 my-1 p-0 legend-items">
-                        <div class="m-0 p-0 icon-container food-icon">
-                            <img src="{{ asset('assets/icons/food-icon.png') }}" alt="">
-                        </div>
-                        <p class="mx-2 my-0 p-0 w-25">Food</p>
-                        <p class="mx-2 my-0 p-0">50%</p>
-                        <p class="mx-2 my-0 p-0">IDR 650,000</p>
-                    </div>
-                    <div class="d-flex flex-row align-items-center justify-content-between mx-0 my-1 p-0 legend-items">
-                        <div class="m-0 p-0 icon-container groceries-icon">
-                            <img src="{{ asset('assets/icons/groceries-icon.png') }}" alt="">
-                        </div>
-                        <p class="mx-2 my-0 p-0 w-25">Groceries</p>
-                        <p class="mx-2 my-0 p-0">35%</p>
-                        <p class="mx-2 my-0 p-0">IDR 455,000</p>
-                    </div>
-                    <div class="d-flex flex-row align-items-center justify-content-between mx-0 my-1 p-0 legend-items">
-                        <div class="m-0 p-0 icon-container education-icon">
-                            <img src="{{ asset('assets/icons/education-icon.png') }}" alt="">
-                        </div>
-                        <p class="mx-2 my-0 p-0 w-25">Education</p>
-                        <p class="mx-2 my-0 p-0">15%</p>
-                        <p class="mx-2 my-0 p-0">IDR 195,000</p>
-                    </div>
+            
                 </div>
             </div>
         </div>
     </div>
 @endsection
 @section('extra-script')
+    <script>
+        var expenseData = {
+            labels: @json($expenseLabels),
+            datasets: [{
+                data: @json($expenseAmounts),
+                backgroundColor: @json($expenseColors),
+            }]
+        };
+
+        var incomeData = {
+            labels: @json($incomeLabels),
+            datasets: [{
+                data: @json($incomeAmounts),
+                backgroundColor: @json($incomeColors),
+            }]
+        };
+        var Options = {
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    enabled: true,
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.label + ': {{ Auth::user()->currency }}' + tooltipItem.raw.toLocaleString();
+                        }
+                    }
+                }
+            },
+            cutout: '70%',
+            responsive: true,
+            maintainAspectRatio: false,
+        }
+
+        // Render legends dynamically
+        function renderLegends(labels, amounts, colors) {
+            let total = amounts.reduce((a, b) => a + b, 0);
+            let legendHtml = '';
+            labels.forEach((label, i) => {
+                let percentage = total ? ((amounts[i] / total) * 100).toFixed(0) : 0;
+                                                    
+                legendHtml += `
+                    <div class="d-flex flex-row align-items-center justify-content-between mx-0 my-1 p-0 legend-items">
+                        <div class="m-0 p-0 icon-container" style="background-color:${colors[i]}">
+                            <img width="22.5" height="22.5" src="{{ asset('assets/images') }}/${label.toLowerCase()}bw.png" alt="" class="m-0 p-0 white-icon">
+                        </div>
+                        <p class="mx-2 my-0 p-0 w-25">${label}</p>
+                        <p class="mx-2 my-0 p-0">${percentage}%</p>
+                        <p class="mx-2 my-0 p-0">{{ Auth::user()->currency }} ${amounts[i].toLocaleString()}</p>
+                    </div>
+                `;
+            });
+            document.querySelector('.legends').innerHTML = legendHtml;
+        }
+
+        function updateCenterText(amount, label) {
+            const totalEl = document.querySelector('.total');
+            const titleEl = document.querySelector('.total-title');
+
+            const formatted = '{{ Auth::user()->currency }} ' + amount.toLocaleString();
+
+            totalEl.textContent = formatted;
+            titleEl.textContent = label;
+
+            // Scale font based on length
+            if (formatted.length > 15) {
+                totalEl.style.fontSize = '1.2rem';
+            } else if (formatted.length > 10) {
+                totalEl.style.fontSize = '1.5rem';
+            } else {
+                totalEl.style.fontSize = '2rem';
+            }
+        }
+
+        // Initial render
+        renderLegends(expenseData.labels, expenseData.datasets[0].data, expenseData.datasets[0].backgroundColor);
+        updateCenterText(expenseData.datasets[0].data.reduce((a, b) => a + b, 0), 'Total Expense');
+    </script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
 @endsection

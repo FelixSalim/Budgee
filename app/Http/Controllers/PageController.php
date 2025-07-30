@@ -61,9 +61,56 @@ class PageController extends Controller
             ->take(3)
             ->get();
 
+        // Expenses
+        $expenseData = Transaction::with('category')
+            ->where('user_id', $userId)
+            ->where('type', 'expense')
+            ->when($selectedMonthYear !== 'all', function ($query) use ($year, $month) {
+                $query->whereYear('transaction_date', $year)
+                    ->whereMonth('transaction_date', $month);
+            })
+            ->get()
+            ->groupBy(fn($t) => $t->category->name)
+            ->map(function ($transactions, $categoryName) {
+                return [
+                    'name' => $categoryName,
+                    'color' => optional($transactions->first()->category)->icon_color ?? '#ccc',
+                    'total' => $transactions->sum('amount'),
+                ];
+            })
+            ->values();
+
+        // Incomes
+        $incomeData = Transaction::with('category')
+            ->where('user_id', $userId)
+            ->where('type', 'income')
+            ->when($selectedMonthYear !== 'all', function ($query) use ($year, $month) {
+                $query->whereYear('transaction_date', $year)
+                    ->whereMonth('transaction_date', $month);
+            })
+            ->get()
+            ->groupBy(fn($t) => $t->category->name)
+            ->map(function ($transactions, $categoryName) {
+                return [
+                    'name' => $categoryName,
+                    'color' => optional($transactions->first()->category)->icon_color ?? '#ccc',
+                    'total' => $transactions->sum('amount'),
+                ];
+            })
+            ->values();
+
+        $expenseLabels = $expenseData->pluck('name');
+        $incomeLabels = $incomeData->pluck('name');
+        $expenseColors = $expenseData->pluck('color');
+        $incomeColors = $incomeData->pluck('color');
+        $expenseAmounts = $expenseData->pluck('total');
+        $incomeAmounts = $incomeData->pluck('total');
+
         return view('dashboard', compact(
             'months', 'selectedMonthYear',
-            'totalIncome', 'totalExpense', 'balance', 'recentTransactions'
+            'totalIncome', 'totalExpense', 'balance', 'recentTransactions',
+            'expenseLabels', 'incomeLabels', 'expenseColors', 'incomeColors',
+            'expenseAmounts', 'incomeAmounts'
         ));
     }
 
