@@ -28,6 +28,8 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/regularpayment/update/{id}', [RegularPaymentController::class, 'update'])->name('regularpayment.update');
     
     Route::delete('/regularpayment/{id}', [RegularPaymentController::class, 'destroy'])->name('regularpayment.destroy');
+
+    Route::get('/newregularpayment', [PageController::class, 'newregularpayment'])->name('newregularpayment');
 });
 
 Route::middleware(['auth'])->group(function () {
