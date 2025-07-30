@@ -16,6 +16,14 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/newtransaction', [PageController::class, 'newtransaction'])->name('newtransaction');
 
     Route::post('/store-transaction', [TransactionController::class, 'storeTransaction'])->name('transaction.store');
+
+    Route::get('/transactions/{transaction}', [TransactionController::class, 'show'])->name('transaction.show');
+    
+    Route::get('/transactions/{transaction}/edit', [TransactionController::class, 'edit'])->name('transaction.edit');
+    
+    Route::put('/transactions/{transaction}', [TransactionController::class, 'update'])->name('transaction.update');
+    
+    Route::delete('/transactions/{transaction}', [TransactionController::class, 'destroy'])->name('transaction.destroy');
 });
 
 Route::middleware(['auth'])->group(function () {

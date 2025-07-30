@@ -102,6 +102,7 @@
                             <th scope="col">Detail</th>
                             <th scope="col">Date</th>
                             <th scope="col">Amount</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -133,6 +134,11 @@
                                 <td class="{{ $transaction->type === 'income' ? 'amount-increase' : 'amount-decrease' }}">
                                     {{ $transaction->type === 'income' ? '+' : '-' }}
                                     {{ Auth::user()->currency }} {{ number_format($transaction->amount, 0) }}
+                                </td>
+                                <td>
+                                    <a href="{{ route('transaction.show', $transaction->id) }}" class="btn detail-btn">
+                                        Details
+                                    </a>
                                 </td>
                             </tr>
                         @empty

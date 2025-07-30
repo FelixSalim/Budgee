@@ -1,4 +1,4 @@
-<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+<a href="/dashboard" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
     <img class="bi me-2 rounded-circle" width="70" height="70" src="{{ asset('assets/images/logo.jpg') }}" style="object-fit:cover;">
     <span class="fs-3 ms-2" style="color: #767676 !important;">Budgee</span>
 </a>

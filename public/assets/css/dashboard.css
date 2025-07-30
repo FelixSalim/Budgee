@@ -54,7 +54,7 @@
     transition: 0.3s ease-in-out;
 }
 
-.see-more-button {
+.see-more-button, .detail-btn {
     background-color: #005CAB;
     color: white;
     font-weight: 400;
@@ -62,7 +62,7 @@
     padding: 0.5rem 0.7rem;
 }
 
-.see-more-button:hover {
+.see-more-button:hover, .detail-btn:hover {
     background-color: #005CAB;
     color: white;
     transform: scale(1.1);

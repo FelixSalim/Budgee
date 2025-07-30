@@ -62,6 +62,7 @@
                     <th scope="col">Detail</th>
                     <th scope="col">Date</th>
                     <th scope="col">Amount</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -81,6 +82,11 @@
                         <td>{{ \Carbon\Carbon::parse($transaction->transaction_date)->format('d-m-y') }}</td>
                         <td class="{{ $transaction->type === 'expense' ? 'amount-decrease' : 'amount-increase' }}">
                             {{ $transaction->type === 'expense' ? '-' : '+' }}{{ Auth::user()->currency }} {{ number_format($transaction->amount, 0) }}
+                        </td>
+                        <td>
+                            <a href="{{ route('transaction.show', $transaction->id) }}" class="btn detail-btn">
+                                Details
+                            </a>
                         </td>
                     </tr>
                 @empty
