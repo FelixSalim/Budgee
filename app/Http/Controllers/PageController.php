@@ -1,13 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Category;
 use App\Models\Transaction;
 use App\Models\Goal;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Rule; // Import the Rule class
 
 class PageController extends Controller
 {
