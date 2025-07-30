@@ -142,20 +142,8 @@ table thead tr th, table tbody tr td {
 }
 
 
-.food-icon {
-    background-color: #AA9900;
-}
-
-.paycheck-icon {
-    background-color: #60AA00;
-}
-
-.groceries-icon {
-    background-color: #AA007D;
-}
-
-.education-icon {
-    background-color: #4F00AA;
+.white-icon {
+    filter: brightness(0) invert(1);
 }
 
 .amount-decrease {

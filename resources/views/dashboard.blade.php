@@ -44,16 +44,22 @@
                             </a>
                         </div>
                         <div class="ms-2 me-0 my-0 p-0">
-                            <div class="dropdown">
-                                <button class="btn dropdown-toggle month-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Month
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </div>
+                           <form action="{{ route('home') }}" method="GET">
+                                <div class="dropdown">
+                                    <button class="btn dropdown-toggle month-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{ $months[$selectedMonthYear] ?? 'Month' }}
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        @foreach($months as $num => $name)
+                                            <li>
+                                                <a class="dropdown-item" href="{{ route('home', ['month' => $num]) }}">
+                                                    {{ $name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -80,7 +86,7 @@
             </div>
             <div class="row mt-4 mx-0 mb-0 p-4 transaction-history-container">
                 <div class="d-flex justify-content-between align-items-center mb-3 ms-0 me-0 mt-0 p-0">
-                    <h1 class="transaction-history-title h1 my-2 mx-0 p-0">Recent Cash Flow</h1>
+                    <h1 class="transaction-history-title h1 my-2 mx-0 p-0">Recent Cash Flow - {{ $months[$selectedMonthYear] ?? 'All Months' }}</h1>
                     <div class="m-0 p-0">
                         <a href="{{ route('transactions') }}">
                             <button class="btn see-more-button">
@@ -99,36 +105,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="py-3">
-                                <div class="row d-flex align-items-center m-0 p-0">
-                                    <div class="col-3 d-flex justify-content-center align-items-center me-2 ms-0 my-0 icon-container food-icon">
-                                        <img src="{{ asset('assets/icons/food-icon.png') }}" alt="Food Icon" class="m-0 p-0">
+                        @forelse($recentTransactions as $transaction)
+                            <tr>
+                                <td class="py-3">
+                                    <div class="row d-flex align-items-center m-0 p-0">
+                                        <div class="col-3 d-flex justify-content-center align-items-center me-2 ms-0 my-0 icon-container"
+                                            style="background-color: {{ $transaction->category->icon_color }}">
+                                            @if($transaction->category && $transaction->category->icon)
+                                                @php
+                                                    $iconBase = pathinfo($transaction->category->icon, PATHINFO_FILENAME); // remove extension
+                                                    $iconFile = $iconBase . 'bw.png'; // add bw.png
+                                                @endphp
+                                                <img
+                                                    width="22.5" height="22.5"
+                                                    src="{{ asset('assets/images/' . $iconFile) }}"
+                                                    alt="{{ $transaction->category->name }} Icon"
+                                                    class="m-0 p-0 white-icon">
+                                            @endif
+                                        </div>
+                                        <div class="col m-0 p-0">
+                                            <p class="m-0 p-0">{{ $transaction->category->name ?? 'Uncategorized' }}</p>
+                                        </div>
                                     </div>
-                                    <div class="col m-0 p-0">
-                                        <p class="m-0 p-0">Food</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Ayam Mba Sri</td>
-                            <td>01-06-25</td>
-                            <td class="amount-decrease">-IDR 50,000</td>
-                        </tr>
-                        <tr>
-                            <td class="py-3">
-                                <div class="row d-flex align-items-center m-0 p-0">
-                                    <div class="col-3 d-flex justify-content-center align-items-center me-2 ms-0 my-0 icon-container paycheck-icon">
-                                        <img src="{{ asset('assets/icons/paycheck-icon.png') }}" alt="Paycheck Icon" class="m-0 p-0">
-                                    </div>
-                                    <div class="col m-0 p-0">
-                                        <p class="m-0 p-0">Paycheck</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Gaji Bulan Juni</td>
-                            <td>01-06-25</td>
-                            <td class="amount-increase">+IDR 4,000,000</td>
-                        </tr>
+                                </td>
+                                <td>{{ $transaction->description ?? '-' }}</td>
+                                <td>{{ \Carbon\Carbon::parse($transaction->transaction_date)->format('d-m-y') }}</td>
+                                <td class="{{ $transaction->type === 'income' ? 'amount-increase' : 'amount-decrease' }}">
+                                    {{ $transaction->type === 'income' ? '+' : '-' }}
+                                    {{ Auth::user()->currency }} {{ number_format($transaction->amount, 0) }}
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center py-3 text-muted">No transactions found</td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>

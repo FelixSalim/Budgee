@@ -11,21 +11,60 @@ use Illuminate\Validation\Rule; // Import the Rule class
 class PageController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $userId = Auth::id();
 
+        $selectedMonthYear = $request->input('month', 'all'); // default to "all"
+
+        // Get all months that have at least one transaction
+        $months = Transaction::where('user_id', $userId)
+            ->selectRaw("DATE_FORMAT(transaction_date, '%Y-%m') as ym, DATE_FORMAT(transaction_date, '%b %Y') as label")
+            ->groupBy('ym', 'label')
+            ->orderBy('ym', 'desc')
+            ->get()
+            ->mapWithKeys(function ($row) {
+                return [$row->ym => $row->label];
+            })
+            ->toArray();
+
+        $months = ['all' => 'All Months'] + $months;
+
         $totalIncome = Transaction::where('user_id', $userId)
-            ->where('type', 'income')
-            ->sum('amount');
+            ->where('type', 'income');
 
         $totalExpense = Transaction::where('user_id', $userId)
-            ->where('type', 'expense')
-            ->sum('amount');
+            ->where('type', 'expense');
+
+        $year = null;
+        $month = null;
+
+        if ($selectedMonthYear !== 'all') {
+            [$year, $month] = explode('-', $selectedMonthYear);
+            $totalIncome->whereYear('transaction_date', $year)->whereMonth('transaction_date', $month);
+            $totalExpense->whereYear('transaction_date', $year)->whereMonth('transaction_date', $month);
+        }
+
+        $totalIncome = $totalIncome->sum('amount');
+        $totalExpense = $totalExpense->sum('amount');
 
         $balance = $totalIncome - $totalExpense;
 
-        return view('dashboard', compact('totalIncome', 'totalExpense', 'balance'));
+        // get recent 3 transactions
+        $recentTransactions = Transaction::with('category')
+            ->where('user_id', $userId)
+            ->when($selectedMonthYear !== 'all', function ($q) use ($year, $month) {
+                $q->whereYear('transaction_date', $year)->whereMonth('transaction_date', $month);
+            })
+            ->orderBy('transaction_date', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get();
+
+        return view('dashboard', compact(
+            'months', 'selectedMonthYear',
+            'totalIncome', 'totalExpense', 'balance', 'recentTransactions'
+        ));
     }
 
     public function transactions()
