@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Transaction;
+use App\Models\Goal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -106,9 +107,14 @@ class PageController extends Controller
             ->values();
 
         return view('dashboard', compact(
-            'months', 'selectedMonthYear',
-            'totalIncome', 'totalExpense', 'balance', 'recentTransactions',
-            'expenseData', 'incomeData'
+            'months',
+            'selectedMonthYear',
+            'totalIncome',
+            'totalExpense',
+            'balance',
+            'recentTransactions',
+            'expenseData',
+            'incomeData'
         ));
     }
 
@@ -137,7 +143,7 @@ class PageController extends Controller
             ->orderBy('ym', 'desc')
             ->get()
             ->pluck('ym')
-            ->mapWithKeys(function($ym) {
+            ->mapWithKeys(function ($ym) {
                 $date = \Carbon\Carbon::createFromFormat('Y-m', $ym);
                 return [$ym => $date->format('F Y')];
             })
@@ -155,7 +161,7 @@ class PageController extends Controller
         return view('newtransaction', compact('expenses', 'income'));
     }
 
-        public function categories()
+    public function categories()
     {
         $user = Auth::user();
         $expenses = $user->categories()->where('type', 'expense')->get();
@@ -306,12 +312,48 @@ class PageController extends Controller
     }
     public function goalslist()
     {
-        return view('goalslist');
+        $goals = Goal::where('user_id', Auth::id())->get();
+        $totalSaved = $goals->sum('current_amount');
+        return view('goalslist', compact('goals', 'totalSaved'));
     }
     public function newgoals()
     {
         return view('newgoals');
     }
+
+    public function storeGoal(Request $request)
+    {
+        $request->validate([
+            'goalName' => 'required|string',
+            'targetDate' => 'required|date',
+            'goalAmount' => 'required|numeric',
+        ]);
+
+        Goal::create([
+            'user_id' => Auth::id(),
+            'name' => $request->goalName,
+            'target_date' => $request->targetDate,
+            'target_amount' => $request->goalAmount,
+            'current_amount' => 0,
+            'icon' => $request->icon,
+            'color' => $request->color,
+        ]);
+
+        return redirect()->route('goalslist')->with('success', 'Goal created successfully!');
+    }
+
+    public function addMoneyToGoal(Request $request, $id)
+    {
+        $request->validate([
+            'amount' => 'required|numeric|min:1'
+        ]);
+
+        $goal = Goal::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+        $goal->increment('current_amount', $request->amount);
+
+        return redirect()->route('goalslist')->with('success', 'Money added to goal successfully.');
+    }
+
     public function register()
     {
         return view('register');

@@ -20,13 +20,13 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/regularpayment/new', [RegularPaymentController::class, 'create'])->name('regularpayment.create');
-    
+
     Route::post('/regularpayment/store', [RegularPaymentController::class, 'store'])->name('regularpayment.store');
-    
+
     Route::get('/regularpayment', [RegularPaymentController::class, 'index'])->name('regularpayment');
-    
+
     Route::put('/regularpayment/update/{id}', [RegularPaymentController::class, 'update'])->name('regularpayment.update');
-    
+
     Route::delete('/regularpayment/{id}', [RegularPaymentController::class, 'destroy'])->name('regularpayment.destroy');
 
     Route::get('/newregularpayment', [PageController::class, 'newregularpayment'])->name('newregularpayment');
@@ -34,15 +34,15 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/categories', [PageController::class, 'categories'])->name('categories');
-    
+
     Route::get('/categories/new', [PageController::class, 'newcategory'])->name('newcategory');
-    
+
     Route::post('/categories/store', [PageController::class, 'storeCategory'])->name('categories.store');
-    
+
     Route::get('/categories/{category}/edit', [PageController::class, 'editCategory'])->name('categories.edit'); // New edit route
-    
+
     Route::put('/categories/{category}', [PageController::class, 'updateCategory'])->name('categories.update'); // New update route
-    
+
     Route::delete('/categories/{id}/delete', [PageController::class, 'deleteCategory'])->name('categories.delete');
 });
 
@@ -54,11 +54,15 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [PageController::class, 'profile'])->name('profile');
-    
+
     Route::put('/profile', [AuthController::class, 'update'])->name('profile.update');
-    
+
     Route::post('/update-profile-picture', [AuthController::class, 'updateProfilePicture'])->name('user.updateProfilePicture');
 });
+
+Route::post('/goals/store', [PageController::class, 'storeGoal'])->name('storeGoal');
+Route::post('/goals/{id}/add-money', [PageController::class, 'addMoneyToGoal'])->name('goals.addMoney');
+
 
 // Auth::routes(); --> harus install laravel UI dlu
 // Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
