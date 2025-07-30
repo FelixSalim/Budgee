@@ -7,10 +7,20 @@
     <div class="container py-5 px-4">
         <div class="top-bar">
             <h4><a href="{{ url()->previous() }}"><i class="bi bi-arrow-left me-2"></i></a> Add Transaction</h4>
-            <button class="btn-today d-flex justify-content-center align-items-center"><img width="30" height="30" src="{{ asset('assets/images/date-icon.png') }}" class="mx-2">Today</button>
+            <div class="d-flex align-items-center">
+                {{-- Button showing the current date --}}
+                <button type="button" id="dateBtn" class="btn-today d-flex justify-content-center align-items-center">
+                    <img width="30" height="30" src="{{ asset('assets/images/date-icon.png') }}" class="mx-2">
+                    {{ date('d M Y') }}
+                </button>
+            </div>
         </div>
-
-        <form>
+        <form action="{{ route('transaction.store') }}" method="POST">
+            @csrf
+            
+            {{-- Hidden input for transaction date --}}
+            <input type="hidden" name="transaction_date" id="transaction_date" value="{{ date('Y-m-d') }}">
+            
             <div class="mb-5">
                 <div class="d-flex align-items-center gap-3">
                     <input type="text" name="amount" class="custom-input w-25" placeholder="0">
@@ -120,8 +130,36 @@
                     } else {
                         categoryGrid.innerHTML = incomeTemplate;
                     }
+                    setLabelColors();
+                    setIconColors();
                     attachCategoryEvents();
                 });
+            });
+
+            const dateInput = document.querySelector("#transaction_date");
+            const dateBtn = document.querySelector("#dateBtn");
+
+            // Initialize Flatpickr but don't show it immediately
+            const picker = flatpickr(dateBtn, {
+                defaultDate: dateInput.value,
+                maxDate: "today", // Prevent future dates
+                dateFormat: "Y-m-d",
+                position: "below", // Ensures it appears below button
+                onChange: function (selectedDates, dateStr) {
+                    // Update hidden input for form submission
+                    dateInput.value = dateStr;
+
+                    // Update button label
+                    const formatted = selectedDates[0].toLocaleDateString('en-GB', {
+                        day: 'numeric', month: 'short', year: 'numeric'
+                    });
+                    dateBtn.innerHTML = `<img width="30" height="30" src="/assets/images/date-icon.png" class="mx-2">${formatted}`;
+                }
+            });
+
+            // Open picker on button click
+            dateBtn.addEventListener("click", function () {
+                picker.open();
             });
         });
 
@@ -194,18 +232,21 @@
                 }
             });
         }
-        // Map the label colors to the image icon color
-        document.querySelectorAll('.category-box').forEach(box => {
-            var label = box.querySelector('.category-label');
-            var icon = box.querySelector('img');
-            if (icon && label) {
-                var iconColor = icon.src.split('/').pop(); // Get the color from the image URL
-                label.style.color = iconColor; // Set the label color to match the icon color
-            } else {
-                label.style.color = '#767676'; // Default color for new category
-            }
-        });
 
+        function setLabelColors() {
+            document.querySelectorAll('.category-box').forEach(box => {
+                var label = box.querySelector('.category-label');
+                var icon = box.querySelector('img');
+                if (icon && label) {
+                    var iconColor = icon.src.split('/').pop(); // Get the color from the image URL
+                    label.style.color = iconColor; // Set the label color to match the icon color
+                } else {
+                    label.style.color = '#767676'; // Default color for new category
+                }
+            });
+        }
+
+        setLabelColors();
         setIconColors();
     </script>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Category;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,19 @@ class PageController extends Controller
 
     public function index()
     {
-        return view('dashboard');
+        $userId = Auth::id();
+
+        $totalIncome = Transaction::where('user_id', $userId)
+            ->where('type', 'income')
+            ->sum('amount');
+
+        $totalExpense = Transaction::where('user_id', $userId)
+            ->where('type', 'expense')
+            ->sum('amount');
+
+        $balance = $totalIncome - $totalExpense;
+
+        return view('dashboard', compact('totalIncome', 'totalExpense', 'balance'));
     }
 
     public function transactions()

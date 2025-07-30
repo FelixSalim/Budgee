@@ -32,7 +32,7 @@
                     {{-- Database --}}
                     <div class="m-0 p-0" style="width: auto;">
                         <h1 class="balance m-0 p-0">
-                            IDR 10,000,000
+                            {{ Auth::user()->currency }} {{ number_format($balance, 2) }}
                         </h1>
                     </div>
                     <div class="m-0 p-0 d-flex flex-row" style="width: auto;">
@@ -63,7 +63,7 @@
                             <img src="{{ asset('assets/icons/incomes-icon.png') }}" alt="" width="35" height="35">
                             <div class="income-details mx-3">
                                 <p class="income-title mx-0 my-1 p-0">Incomes</p>
-                                <p class="income mx-0 my-1 p-0">IDR 4,000,000</p>
+                                <p class="income mx-0 my-1 p-0">{{ Auth::user()->currency }} {{ number_format($totalIncome, 2) }}</p>
                             </div>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                             <img src="{{ asset('assets/icons/expenses-icon.png') }}" alt="" width="35" height="35">
                             <div class="expense-details mx-3">
                                 <p class="expense-title mx-0 my-1 p-0">Expenses</p>
-                                <p class="expense mx-0 my-1 p-0">IDR 2,000,000</p>
+                                <p class="expense mx-0 my-1 p-0">{{ Auth::user()->currency }} {{ number_format($totalExpense, 2) }}</p>
                             </div>
                         </div>
                     </div>
