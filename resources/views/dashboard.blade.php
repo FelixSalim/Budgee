@@ -199,21 +199,9 @@
 @endsection
 @section('extra-script')
     <script>
-        var expenseData = {
-            labels: @json($expenseLabels),
-            datasets: [{
-                data: @json($expenseAmounts),
-                backgroundColor: @json($expenseColors),
-            }]
-        };
+        const expenseData = @json($expenseData);
+        const incomeData = @json($incomeData);
 
-        var incomeData = {
-            labels: @json($incomeLabels),
-            datasets: [{
-                data: @json($incomeAmounts),
-                backgroundColor: @json($incomeColors),
-            }]
-        };
         var Options = {
             plugins: {
                 legend: {
@@ -234,23 +222,31 @@
         }
 
         // Render legends dynamically
-        function renderLegends(labels, amounts, colors) {
-            let total = amounts.reduce((a, b) => a + b, 0);
+        function renderLegends(data) {
+            let total = data.reduce((sum, cat) => sum + cat.total, 0);
             let legendHtml = '';
-            labels.forEach((label, i) => {
-                let percentage = total ? ((amounts[i] / total) * 100).toFixed(0) : 0;
-                                                    
+
+            data.forEach(cat => {
+                let percentage = total ? ((cat.total / total) * 100).toFixed(0) : 0;
+                let overBudget = cat.planned_outlay > 0 && cat.total > cat.planned_outlay;
+
                 legendHtml += `
                     <div class="d-flex flex-row align-items-center justify-content-between mx-0 my-1 p-0 legend-items">
-                        <div class="m-0 p-0 icon-container" style="background-color:${colors[i]}">
-                            <img width="22.5" height="22.5" src="{{ asset('assets/images') }}/${label.toLowerCase()}bw.png" alt="" class="m-0 p-0 white-icon">
+                        <div class="m-0 p-0 icon-container" style="background-color:${cat.color}">
+                            <img width="22.5" height="22.5" src="/assets/images/${cat.icon}" class="white-icon">
                         </div>
-                        <p class="mx-2 my-0 p-0 w-25">${label}</p>
+                        <p class="mx-2 my-0 p-0 w-25">${cat.name}</p>
                         <p class="mx-2 my-0 p-0">${percentage}%</p>
-                        <p class="mx-2 my-0 p-0">{{ Auth::user()->currency }} ${amounts[i].toLocaleString()}</p>
+                        <p class="mx-2 my-0 p-0 ${overBudget ? 'text-danger' : ''}">
+                            {{ Auth::user()->currency }} ${cat.total.toLocaleString()}
+                            <span class="text-muted" style="font-size:0.85em">
+                                of {{ Auth::user()->currency }} ${cat.planned_outlay.toLocaleString()}
+                            </span>
+                        </p>
                     </div>
                 `;
             });
+
             document.querySelector('.legends').innerHTML = legendHtml;
         }
 
@@ -273,9 +269,23 @@
             }
         }
 
+        // Convert Laravel data to Chart.js dataset format
+        function toChartData(data) {
+            return {
+                labels: data.map(cat => cat.name),
+                datasets: [{
+                    data: data.map(cat => cat.total),
+                    backgroundColor: data.map(cat => cat.color),
+                }]
+            };
+        }
+        // Initialize Chart.js
+        const expenseChartData = toChartData(expenseData);
+        const incomeChartData = toChartData(incomeData);
+
         // Initial render
-        renderLegends(expenseData.labels, expenseData.datasets[0].data, expenseData.datasets[0].backgroundColor);
-        updateCenterText(expenseData.datasets[0].data.reduce((a, b) => a + b, 0), 'Total Expense');
+        renderLegends(expenseData);
+        updateCenterText(expenseData.reduce((a, b) => a + b.total, 0), 'Total Expense');
     </script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
 @endsection

@@ -72,10 +72,13 @@ class PageController extends Controller
             ->get()
             ->groupBy(fn($t) => $t->category->name)
             ->map(function ($transactions, $categoryName) {
+                $category = $transactions->first()->category;
                 return [
                     'name' => $categoryName,
-                    'color' => optional($transactions->first()->category)->icon_color ?? '#ccc',
+                    'color' => $category->icon_color ?? '#ccc',
                     'total' => $transactions->sum('amount'),
+                    'planned_outlay' => $category->planned_outlay ?? 0,
+                    'icon' => str_replace('.png', 'bw.png', $category->icon),
                 ];
             })
             ->values();
@@ -91,26 +94,21 @@ class PageController extends Controller
             ->get()
             ->groupBy(fn($t) => $t->category->name)
             ->map(function ($transactions, $categoryName) {
+                $category = $transactions->first()->category;
                 return [
                     'name' => $categoryName,
-                    'color' => optional($transactions->first()->category)->icon_color ?? '#ccc',
+                    'color' => $category->icon_color ?? '#ccc',
                     'total' => $transactions->sum('amount'),
+                    'planned_outlay' => $category->planned_outlay ?? 0,
+                    'icon' => str_replace('.png', 'bw.png', $category->icon),
                 ];
             })
             ->values();
 
-        $expenseLabels = $expenseData->pluck('name');
-        $incomeLabels = $incomeData->pluck('name');
-        $expenseColors = $expenseData->pluck('color');
-        $incomeColors = $incomeData->pluck('color');
-        $expenseAmounts = $expenseData->pluck('total');
-        $incomeAmounts = $incomeData->pluck('total');
-
         return view('dashboard', compact(
             'months', 'selectedMonthYear',
             'totalIncome', 'totalExpense', 'balance', 'recentTransactions',
-            'expenseLabels', 'incomeLabels', 'expenseColors', 'incomeColors',
-            'expenseAmounts', 'incomeAmounts'
+            'expenseData', 'incomeData'
         ));
     }
 
