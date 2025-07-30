@@ -34,7 +34,7 @@
                     @forelse($regularPayments as $payment)
                         <tr data-id="{{ $payment->id }}">
                             <td>
-                                <img src="{{ asset('assets/images/' . $payment->icon) }}" class="me-2" alt="Icon" style="width: 1.5vw; height:1.5vh">
+                                <img src="{{ asset('assets/images/' . $payment->icon) }}" class="me-2" alt="Icon" width="20" height="20">
                                 <span>{{ $payment->name }}</span>
                             </td>
                             <td>
