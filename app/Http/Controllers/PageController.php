@@ -114,9 +114,38 @@ class PageController extends Controller
         ));
     }
 
-    public function transactions()
+    public function transactions(Request $request)
     {
-        return view('transaction');
+        $type = $request->get('type', 'expense'); // default expenses
+        $selectedMonthYear = $request->input('month', 'all'); // default to "all"
+
+        $query = Transaction::with('category')
+            ->where('user_id', auth()->id())
+            ->where('type', $type);
+
+        if ($selectedMonthYear !== 'all') {
+            $parts = explode('-', $selectedMonthYear); // e.g. 2025-06
+            $query->whereYear('transaction_date', $parts[0])
+                ->whereMonth('transaction_date', $parts[1]);
+        }
+
+        $transactions = $query->orderBy('transaction_date', 'desc')->get();
+        $total = $transactions->sum('amount');
+
+        // Generate month list
+        $months = Transaction::selectRaw("DATE_FORMAT(transaction_date, '%Y-%m') as ym")
+            ->where('user_id', auth()->id())
+            ->distinct()
+            ->orderBy('ym', 'desc')
+            ->get()
+            ->pluck('ym')
+            ->mapWithKeys(function($ym) {
+                $date = \Carbon\Carbon::createFromFormat('Y-m', $ym);
+                return [$ym => $date->format('F Y')];
+            })
+            ->toArray();
+
+        return view('transaction', compact('transactions', 'total', 'months', 'selectedMonthYear', 'type'));
     }
 
     public function newtransaction()

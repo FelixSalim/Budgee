@@ -34,10 +34,15 @@ Route::middleware(['auth'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/categories', [PageController::class, 'categories'])->name('categories');
+    
     Route::get('/categories/new', [PageController::class, 'newcategory'])->name('newcategory');
+    
     Route::post('/categories/store', [PageController::class, 'storeCategory'])->name('categories.store');
+    
     Route::get('/categories/{category}/edit', [PageController::class, 'editCategory'])->name('categories.edit'); // New edit route
+    
     Route::put('/categories/{category}', [PageController::class, 'updateCategory'])->name('categories.update'); // New update route
+    
     Route::delete('/categories/{id}/delete', [PageController::class, 'deleteCategory'])->name('categories.delete');
 });
 

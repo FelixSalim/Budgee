@@ -13,20 +13,40 @@
     font-size: 0.9rem;
 }
 
+.toggle-btn:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+.toggle-btn:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
 .toggle-btn {
     background-color: #005CAB;
     color: white;
     border: none;
     padding: 6px 20px;
     font-weight: 400;
-    border-radius: 8px 0 0 8px;
+    text-decoration: none;
+    text-align: center;
 }
+
+.icon-white {
+    filter: brightness(0) invert(1);
+}
+
 .toggle-btn.secondary {
     background-color: white;
     color: #005CAB;
     border: 2px solid #005CAB;
+}
+
+.toggle-btn:first-child.secondary {
+    border-right: none;
+}
+
+.toggle-btn:last-child.secondary {
     border-left: none;
-    border-radius: 0 8px 8px 0;
 }
 
 thead th {
@@ -64,23 +84,6 @@ table thead tr th, table tbody tr td {
     width: 2.2rem;
     height: 2.2rem;
     border-radius: 50%;
-}
-
-
-.food-icon {
-    background-color: #AA9900;
-}
-
-.paycheck-icon {
-    background-color: #60AA00;
-}
-
-.groceries-icon {
-    background-color: #AA007D;
-}
-
-.education-icon {
-    background-color: #4F00AA;
 }
 
 .amount-decrease {

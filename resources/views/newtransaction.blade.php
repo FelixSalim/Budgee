@@ -6,7 +6,7 @@
 @section('content')
     <div class="container py-5 px-4">
         <div class="top-bar">
-            <h4><a href="{{ url()->previous() }}"><i class="bi bi-arrow-left me-2"></i></a> Add Transaction</h4>
+            <h4><a href="{{ route('transactions') }}"><i class="bi bi-arrow-left me-2"></i></a> Add Transaction</h4>
             <div class="d-flex align-items-center">
                 {{-- Button showing the current date --}}
                 <button type="button" id="dateBtn" class="btn-today d-flex justify-content-center align-items-center">
