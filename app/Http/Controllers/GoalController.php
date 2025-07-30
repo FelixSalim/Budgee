@@ -8,6 +8,40 @@ use Illuminate\Support\Facades\Auth;
 
 class GoalController extends Controller
 {
+
+    public function storeGoal(Request $request)
+    {
+        $request->validate([
+            'goalName' => 'required|string',
+            'targetDate' => 'required|date',
+            'goalAmount' => 'required|numeric',
+        ]);
+
+        Goal::create([
+            'user_id' => Auth::id(),
+            'name' => $request->goalName,
+            'target_date' => $request->targetDate,
+            'target_amount' => $request->goalAmount,
+            'current_amount' => 0,
+            'icon' => $request->icon,
+            'color' => $request->color,
+        ]);
+
+        return redirect()->route('goalslist')->with('success', 'Goal created successfully!');
+    }
+
+    public function addMoneyToGoal(Request $request, $id)
+    {
+        $request->validate([
+            'amount' => 'required|numeric|min:1'
+        ]);
+
+        $goal = Goal::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+        $goal->increment('current_amount', $request->amount);
+
+        return redirect()->route('goalslist')->with('success', 'Money added to goal successfully.');
+    }
+
     public function index()
     {
         $goals = Goal::where('user_id', Auth::id())->get();

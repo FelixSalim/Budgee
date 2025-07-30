@@ -176,182 +176,39 @@ class PageController extends Controller
         return view('newcategory');
     }
 
-    public function storeCategory(Request $request)
-    {
-        // Get the authenticated user's ID
-        $userId = Auth::id();
-
-        // Validate the input with added rules
-        $validated = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                // Ensure the category name is unique for the current user
-                Rule::unique('categories')->where(function ($query) use ($userId) {
-                    return $query->where('user_id', $userId);
-                }),
-            ],
-            'type' => 'required|in:income,expense',
-            'planned_outlay' => 'required|numeric|min:0', // 'required' to 'nullable' based on placeholder "Not set"
-            'icon' => 'required|string', // Icon must be selected
-            'icon_color' => 'required|string', // Color must be selected
-        ], [
-            // Custom error messages
-            'name.required' => 'Category name is required.',
-            'name.unique' => 'You already have a category with this name.',
-            'planned_outlay.required' => 'Planned outlay is required.',
-            'planned_outlay.numeric' => 'Planned outlay must be a number.',
-            'planned_outlay.min' => 'Planned outlay cannot be negative.',
-
-        ]);
-
-
-        // Create the category for the authenticated user
-        Auth::user()->categories()->create([
-            'name' => $validated['name'],
-            'type' => $validated['type'],
-            'planned_outlay' => $validated['planned_outlay'],
-            'icon' => $validated['icon'],
-            'icon_color' => $validated['icon_color'],
-        ]);
-
-        return redirect()->route('categories')->with('success', 'Category added successfully!');
-    }
-
-    public function editCategory(Category $category)
-    {
-        // Ensure the category belongs to the authenticated user
-        if ($category->user_id !== Auth::id()) {
-            abort(403); // Forbidden
-        }
-        return view('editcategory', compact('category'));
-    }
-
-    public function updateCategory(Request $request, Category $category)
-    {
-        // Ensure the category belongs to the authenticated user
-        if ($category->user_id !== Auth::id()) {
-            abort(403); // Forbidden
-        }
-
-        $userId = Auth::id();
-
-        $validated = $request->validate([
-            'name' => [
-                'required',
-                'string',
-                'max:255',
-                // Ensure the category name is unique for the current user, excluding the current category
-                Rule::unique('categories')->where(function ($query) use ($userId, $category) {
-                    return $query->where('user_id', $userId)->where('id', '!=', $category->id);
-                }),
-            ],
-            'type' => 'required|in:income,expense',
-            'planned_outlay' => 'required|numeric|min:0', // Changed from 'nullable' to 'required'
-            'icon' => 'required|string',
-            'icon_color' => 'required|string',
-        ], [
-            'name.required' => 'Category name is required.',
-            'name.unique' => 'You already have a category with this name.',
-            'planned_outlay.required' => 'Planned outlay is required.', // Added specific message
-            'planned_outlay.numeric' => 'Planned outlay must be a number.',
-            'planned_outlay.min' => 'Planned outlay cannot be negative.',
-            'icon.required' => 'Please select an icon for the category.',
-            'icon_color.required' => 'Please select a color for the category.',
-        ]);
-
-        // Remove this line as 'planned_outlay' is now required
-        // $validated['planned_outlay'] = $validated['planned_outlay'] ?? 0.00;
-
-        $category->update([
-            'name' => $validated['name'],
-            'type' => $validated['type'],
-            'planned_outlay' => $validated['planned_outlay'],
-            'icon' => $validated['icon'],
-            'icon_color' => $validated['icon_color'],
-        ]);
-
-        return redirect()->route('categories')->with('success', 'Category updated successfully!');
-    }
-
-
-    public function deleteCategory($id)
-    {
-        $category = Category::findOrFail($id);
-
-        // Only allow deleting categories belonging to the authenticated user
-        if ($category->user_id !== Auth::id()) {
-            abort(403); // Forbidden
-        }
-
-        $category->delete();
-
-        return redirect()->route('categories')->with('success', 'Category deleted successfully.');
-    }
-
-
     public function regularpayment()
     {
         // Logic for the categories page
         return view('regularpayment');
     }
+    
     public function newregularpayment()
     {
         // Logic for the categories page
         return view('newregularpayment');
     }
+
     public function profile()
     {
         $user = Auth::user();
         return view('profile', compact('user'));
     }
+
     public function login()
     {
         return view('log-in');
     }
+
     public function goalslist()
     {
         $goals = Goal::where('user_id', Auth::id())->get();
         $totalSaved = $goals->sum('current_amount');
         return view('goalslist', compact('goals', 'totalSaved'));
     }
+
     public function newgoals()
     {
         return view('newgoals');
-    }
-
-    public function storeGoal(Request $request)
-    {
-        $request->validate([
-            'goalName' => 'required|string',
-            'targetDate' => 'required|date',
-            'goalAmount' => 'required|numeric',
-        ]);
-
-        Goal::create([
-            'user_id' => Auth::id(),
-            'name' => $request->goalName,
-            'target_date' => $request->targetDate,
-            'target_amount' => $request->goalAmount,
-            'current_amount' => 0,
-            'icon' => $request->icon,
-            'color' => $request->color,
-        ]);
-
-        return redirect()->route('goalslist')->with('success', 'Goal created successfully!');
-    }
-
-    public function addMoneyToGoal(Request $request, $id)
-    {
-        $request->validate([
-            'amount' => 'required|numeric|min:1'
-        ]);
-
-        $goal = Goal::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
-        $goal->increment('current_amount', $request->amount);
-
-        return redirect()->route('goalslist')->with('success', 'Money added to goal successfully.');
     }
 
     public function register()

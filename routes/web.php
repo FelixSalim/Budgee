@@ -5,6 +5,8 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\RegularPaymentController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GoalController;
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [PageController::class, 'index'])->name('home');
@@ -45,19 +47,23 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/categories/new', [PageController::class, 'newcategory'])->name('newcategory');
 
-    Route::post('/categories/store', [PageController::class, 'storeCategory'])->name('categories.store');
+    Route::post('/categories/store', [CategoryController::class, 'storeCategory'])->name('categories.store');
 
-    Route::get('/categories/{category}/edit', [PageController::class, 'editCategory'])->name('categories.edit'); // New edit route
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'editCategory'])->name('categories.edit'); // New edit route
 
-    Route::put('/categories/{category}', [PageController::class, 'updateCategory'])->name('categories.update'); // New update route
+    Route::put('/categories/{category}', [CategoryController::class, 'updateCategory'])->name('categories.update'); // New update route
 
-    Route::delete('/categories/{id}/delete', [PageController::class, 'deleteCategory'])->name('categories.delete');
+    Route::delete('/categories/{id}/delete', [CategoryController::class, 'deleteCategory'])->name('categories.delete');
 });
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/goalslist', [PageController::class, 'goalslist'])->name('goalslist');
 
     Route::get('/newgoals', [PageController::class, 'newgoals'])->name('newgoals');
+
+    Route::post('/goals/store', [GoalController::class, 'storeGoal'])->name('storeGoal');
+
+    Route::post('/goals/{id}/add-money', [GoalController::class, 'addMoneyToGoal'])->name('goals.addMoney');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -67,9 +73,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/update-profile-picture', [AuthController::class, 'updateProfilePicture'])->name('user.updateProfilePicture');
 });
-
-Route::post('/goals/store', [PageController::class, 'storeGoal'])->name('storeGoal');
-Route::post('/goals/{id}/add-money', [PageController::class, 'addMoneyToGoal'])->name('goals.addMoney');
 
 
 // Auth::routes(); --> harus install laravel UI dlu
