@@ -37,6 +37,11 @@
             <ul class="list-group list-group-flush border border-secondary rounded shadow-sm">
                 <li class="list-group-item text-body-tertiary">Currency: <span>{{ $user->currency }}</span></li>
             </ul>
+
+            {{-- Update Profile Button --}}
+            <div class="d-flex justify-content-center mt-4">
+                <button onclick="enableEdit()" class="btn text-white" style="background-color: #005CAB; width: 100%;">Update Profile</button>
+            </div>
         </div>
     </div>
 
@@ -60,11 +65,6 @@
 
             <button type="submit" class="btn text-white" style="background-color: #005CAB; width: 100%;">Submit</button>
         </form>
-    </div>
-
-    {{-- Update Profile Button --}}
-    <div class="d-flex justify-content-center mt-4">
-        <button onclick="enableEdit()" class="btn text-white" style="background-color: #005CAB; width: 35%;">Update Profile</button>
     </div>
 
     {{-- Log Out Button --}}
