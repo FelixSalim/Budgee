@@ -129,8 +129,6 @@ class GoalController extends Controller
             'name' => $request->goalName,
             'target_date' => $request->targetDate,
             'target_amount' => $request->goalAmount,
-            'icon' => $request->icon,
-            'color' => $request->color,
         ]);
 
         return redirect()->route('goalslist')->with('success', 'Goal updated successfully!');

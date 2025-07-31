@@ -3,6 +3,10 @@
 @section('title', 'Goals List')
 
 @section('content')
+    @php
+        $currency = Auth::user()->currency;
+    @endphp
+
     <div class="container-fluid px-5 py-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
             <h1 class="page-title">Goals</h1>
@@ -15,7 +19,7 @@
 
         <div class="bg-white p-4 border shadow-sm mb-4">
             <h5 class="total-saved-title">Total Saved</h5>
-            <h3 class="money-saved-title">IDR {{ number_format($totalSaved ?? 0, 0, ',', '.') }}</h3>
+            <h3 class="money-saved-title">{{ $currency }} {{ number_format($totalSaved ?? 0, 0, ',', '.') }}</h3>
         </div>
 
         <div class="row">
@@ -53,7 +57,8 @@
                                 </div>
                             </h5>
 
-                            <p class="money-goal mb-1">IDR {{ number_format($goal->target_amount, 0, ',', '.') }}</p>
+                            <p class="money-goal mb-1">{{ $currency }} {{ number_format($goal->target_amount, 0, ',', '.') }}
+                            </p>
 
                             <div class="progress mb-1" style="height: 5px">
                                 <div class="progress-bar" style="width: {{ $progress }}%"></div>
@@ -61,7 +66,7 @@
 
                             <div class="d-flex justify-content-between">
                                 <p class="money-saved">
-                                    IDR {{ number_format($goal->current_amount, 0, ',', '.') }}
+                                    {{ $currency }} {{ number_format($goal->current_amount, 0, ',', '.') }}
                                     <span class="saved-word">saved</span>
                                 </p>
                                 <p class="saved-word">{{ $progress }}%</p>
@@ -88,7 +93,7 @@
                                             <div class="mb-2">
                                                 <label for="amount" class="form-label">Add Amount</label>
                                                 <input type="number" name="amount" class="form-control"
-                                                    placeholder="e.g. 1000000" required>
+                                                    placeholder="e.g. {{ $currency }} 1000000" required>
                                             </div>
                                             <button type="submit" class="btn btn-sm btn-success w-100">Submit</button>
                                         </form>
