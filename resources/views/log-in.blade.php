@@ -24,7 +24,7 @@
 
 
     <div class="mt-5 d-flex justify-content-center w-100">
-        <img src="assets\images\no-bg logo.png" class="mx-auto d-block img-fluid" width="10%" height="10%"
+        <img src="{{ asset('assets/images/no-bg logo.png') }}" class="mx-auto d-block img-fluid" width="10%" height="10%"
             alt="profile picture">
     </div>
 

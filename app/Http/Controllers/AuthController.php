@@ -36,10 +36,6 @@ class AuthController extends Controller
     }
 
     public function login(Request $request) {
-        // $credentials = $request->validate([
-        //     'username' => 'required',
-        //     'password' => 'required',
-        // ]);
         $credentials = $request->only('username', 'password');
 
         if(Auth::attempt($credentials)) {
@@ -47,9 +43,6 @@ class AuthController extends Controller
             return redirect()->route('home');
         }
 
-        // return back()->withErrors([
-        //     'username' => 'Invalid credentials!',
-        // ])->onlyInput('username');
         return back()->with('error', 'Invalid username or password');
     }
 

@@ -24,7 +24,7 @@
 
 
     <div class="mt-5 d-flex justify-content-center w-100">
-        <img src="assets\images\no-bg logo.png" class="mx-auto d-block img-fluid" width="10%" height="10%"
+        <img src="{{ asset('assets/images/no-bg logo.png') }}" class="mx-auto d-block img-fluid" width="10%" height="10%"
             alt="profile picture">
     </div>
 
@@ -32,7 +32,6 @@
         <h3 class="text-center fw-bold p-5">Create New Account</h3>
 
         <div class="d-flex justify-content-center mb-5">
-            {{-- <div class="d-flex flex-column gap-3" style="width:30%"> --}}
             <form action="{{ route('auth.register') }}" method="POST" class="d-flex flex-column gap-3" style="width:30%">
                 @csrf
 
@@ -41,19 +40,6 @@
                 <input class="form-control form-control-lg" type="password" name="password" placeholder="Password">
                 <input class="form-control form-control-lg" type="password" name="password_confirmation" placeholder="Confirm Password">
 
-                {{-- <div class="btn-group">
-                    <button class="btn dropdown-toggle bg-white" type="button" data-bs-toggle="dropdown"
-                        data-bs-auto-close="true" aria-expanded="false">
-                        Choose Currency
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">USD</a></li>
-                        <li><a class="dropdown-item" href="#">Rp</a></li>
-                        <li><a class="dropdown-item" href="#">JPY</a></li>
-                        <li><a class="dropdown-item" href="#">CNY</a></li>
-                        <li><a class="dropdown-item" href="#">KRW</a></li>
-                    </ul>
-                </div> --}}
                 <select name="currency" class="form-select form-select-lg">
                     <option value="" disabled selected>Choose Currency</option>
                     <option value="USD">USD</option>
@@ -71,10 +57,6 @@
                 </div>
 
                 <div class="d-grid gap-2 col-6 mx-auto mt-3" style="width:100%">
-                    {{-- <a href="{{ route('home') }}">
-                        <button type="button" class="btn text-white w-100" style="background-color: #005CAB;">Register
-                        </button>
-                    </a> --}}
                     <button type="submit" class="btn text-white w-100" style="background-color: #005CAB;">
                         Register
                     </button>
