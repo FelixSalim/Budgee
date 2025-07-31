@@ -20,11 +20,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/store-transaction', [TransactionController::class, 'storeTransaction'])->name('transaction.store');
 
     Route::get('/transactions/{transaction}', [TransactionController::class, 'show'])->name('transaction.show');
-    
+
     Route::get('/transactions/{transaction}/edit', [TransactionController::class, 'edit'])->name('transaction.edit');
-    
+
     Route::put('/transactions/{transaction}', [TransactionController::class, 'update'])->name('transaction.update');
-    
+
     Route::delete('/transactions/{transaction}', [TransactionController::class, 'destroy'])->name('transaction.destroy');
 });
 
@@ -63,7 +63,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/goals/store', [GoalController::class, 'storeGoal'])->name('storeGoal');
 
-    Route::post('/goals/{id}/add-money', [GoalController::class, 'addMoneyToGoal'])->name('goals.addMoney');
+    Route::post('/goals/{id}/add-money', action: [GoalController::class, 'addMoneyToGoal'])->name('goals.addMoney');
+
+    Route::get('/goals/{id}/edit', [GoalController::class, 'editGoal'])->name('goals.edit');
+
+    Route::put('/goals/{id}', [GoalController::class, 'updateGoal'])->name('goals.update');
+
+    Route::delete('/goals/{id}', [GoalController::class, 'deleteGoal'])->name('goals.delete');
 });
 
 Route::middleware(['auth'])->group(function () {

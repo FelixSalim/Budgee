@@ -8,27 +8,28 @@ use Illuminate\Support\Facades\Auth;
 
 class GoalController extends Controller
 {
-
     public function storeGoal(Request $request)
     {
-        $request->validate([
-            'goalName' => 'required|string',
-            'targetDate' => 'required|date',
-            'goalAmount' => 'required|numeric',
+        $validated = $request->validate([
+            'goalName' => 'required|string|max:255',
+            'targetDate' => 'required|date|after_or_equal:today',
+            'goalAmount' => 'required|numeric|min:1',
+            'icon' => 'required|string',
+            'color' => 'required|string',
         ]);
 
         Goal::create([
+            'name' => $validated['goalName'], // <-- pastikan ini sesuai
+            'target_date' => $validated['targetDate'],
+            'target_amount' => $validated['goalAmount'],
+            'icon' => $validated['icon'],
+            'color' => $validated['color'],
             'user_id' => Auth::id(),
-            'name' => $request->goalName,
-            'target_date' => $request->targetDate,
-            'target_amount' => $request->goalAmount,
-            'current_amount' => 0,
-            'icon' => $request->icon,
-            'color' => $request->color,
         ]);
 
         return redirect()->route('goalslist')->with('success', 'Goal created successfully!');
     }
+
 
     public function addMoneyToGoal(Request $request, $id)
     {
@@ -106,5 +107,40 @@ class GoalController extends Controller
         if ($goal->user_id !== Auth::id()) {
             abort(403);
         }
+    }
+
+    public function editGoal($id)
+    {
+        $goal = Goal::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+        return view('editgoals', compact('goal'));
+    }
+
+    public function updateGoal(Request $request, $id)
+    {
+        $request->validate([
+            'goalName' => 'required|string',
+            'targetDate' => 'required|date',
+            'goalAmount' => 'required|numeric',
+        ]);
+
+        $goal = Goal::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+
+        $goal->update([
+            'name' => $request->goalName,
+            'target_date' => $request->targetDate,
+            'target_amount' => $request->goalAmount,
+            'icon' => $request->icon,
+            'color' => $request->color,
+        ]);
+
+        return redirect()->route('goalslist')->with('success', 'Goal updated successfully!');
+    }
+
+    public function deleteGoal($id)
+    {
+        $goal = Goal::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+        $goal->delete();
+
+        return redirect()->route('goalslist')->with('success', 'Goal deleted successfully!');
     }
 }

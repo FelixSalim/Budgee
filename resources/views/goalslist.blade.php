@@ -1,5 +1,7 @@
 @extends('layout.template')
+
 @section('title', 'Goals List')
+
 @section('content')
     <div class="container-fluid px-5 py-5">
         <div class="d-flex justify-content-between align-items-center mb-5">
@@ -13,7 +15,7 @@
 
         <div class="bg-white p-4 border shadow-sm mb-4">
             <h5 class="total-saved-title">Total Saved</h5>
-            <h3 class="money-saved-title">IDR {{ number_format($totalSaved, 0, ',', '.') }}</h3>
+            <h3 class="money-saved-title">IDR {{ number_format($totalSaved ?? 0, 0, ',', '.') }}</h3>
         </div>
 
         <div class="row">
@@ -25,9 +27,9 @@
                     <div class="card shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title fw-bold mb-3 d-flex justify-content-between align-items-center">
-                                <div>
-                                    <img src="{{ asset('assets/assetsGoals/tdesign_education-filled.svg') }}" alt=""
-                                        class="me-3">
+                                <div class="d-flex align-items-center">
+                                    <img src="{{ asset('assets/images/' . $goal->icon) }}" class="me-2" alt="Icon" width="20"
+                                        height="20" style="filter: drop-shadow(0 0 0 {{ $goal->color }});">
                                     {{ $goal->name }}
                                 </div>
                                 <div class="dropdown">
@@ -36,8 +38,17 @@
                                         <img src="{{ asset('assets/assetsGoals/mage_dots.svg') }}" alt="">
                                     </a>
                                     <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                                        <li><a class="dropdown-item" href="#">Edit Goal</a></li>
-                                        <li><a class="dropdown-item" href="#">Delete Goal</a></li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('goals.edit', $goal->id) }}">Edit Goal</a>
+                                        </li>
+                                        <li>
+                                            <form action="{{ route('goals.delete', $goal->id) }}" method="POST"
+                                                onsubmit="return confirm('Are you sure?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="dropdown-item text-danger">Delete Goal</button>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                             </h5>
@@ -49,8 +60,10 @@
                             </div>
 
                             <div class="d-flex justify-content-between">
-                                <p class="money-saved">IDR {{ number_format($goal->current_amount, 0, ',', '.') }} <span
-                                        class="saved-word">saved</span></p>
+                                <p class="money-saved">
+                                    IDR {{ number_format($goal->current_amount, 0, ',', '.') }}
+                                    <span class="saved-word">saved</span>
+                                </p>
                                 <p class="saved-word">{{ $progress }}%</p>
                             </div>
 
@@ -59,7 +72,8 @@
                             <div class="card-info d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
                                     <img class="me-2" src="{{ asset('assets/assetsGoals/calendar.svg') }}" alt="">
-                                    <p class="card-date mb-0">{{ \Carbon\Carbon::parse($goal->target_date)->format('M d, Y') }}
+                                    <p class="card-date mb-0">
+                                        {{ \Carbon\Carbon::parse($goal->target_date)->format('M d, Y') }}
                                     </p>
                                 </div>
 
