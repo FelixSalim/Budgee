@@ -1,7 +1,7 @@
 @extends('layout.template')
 @section('title', 'Regular Payment')
 @section('content')
-<div class="container mt-5">
+<div class="container-fluid mt-5">
     <div class="d-flex mb-4 ms-5 me-5" style="justify-content: space-between; align-items: center; color: rgb(0, 92, 171);">
         <div class="d-flex justify-content-start align-items-center">
             <h2 class="card-title">Regular Payment</h2>

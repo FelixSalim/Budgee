@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/assets/css/transaction.css">
 @endsection
 @section('content')
-<div class="container p-5">
+<div class="container-fluid p-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="page-title m-0 p-0">Transaction</h2>
         <a href="{{ route('newtransaction') }}">
