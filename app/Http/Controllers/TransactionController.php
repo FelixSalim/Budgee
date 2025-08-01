@@ -38,11 +38,15 @@ class TransactionController extends Controller
 
     public function edit(Transaction $transaction){
 
-        $categories = Category::where('user_id', Auth::id())
-            ->where('type', $transaction->type) // only same type categories
+        $expenseCategories = Category::where('user_id', Auth::id())
+            ->where('type', 'expense') // only same type categories
             ->get();
 
-        return view('edittransaction', compact('transaction', 'categories'));
+        $incomeCategories = Category::where('user_id', Auth::id())
+            ->where('type', 'income') // only same type categories
+            ->get();
+
+        return view('edittransaction', compact('transaction', 'expenseCategories', 'incomeCategories'));
     }
 
     public function update(Request $request, Transaction $transaction){

@@ -101,7 +101,7 @@
 .income, .expense {
     color: #263238;
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 thead th {
@@ -210,4 +210,8 @@ a {
 
 .legend-items p:last-child {
     width: 30%;
+}
+
+.legend-items {
+    flex-wrap: wrap;
 }

@@ -27,7 +27,7 @@
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>
-            <a href="{{ url()->previous() }}" class="btn btn-secondary">Back</a>
+            <a href="{{ route('transactions') }}" class="btn btn-secondary">Back</a>
         </div>
     </div>
 </div>

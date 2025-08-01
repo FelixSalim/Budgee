@@ -28,10 +28,8 @@
 
         <div class="mb-3">
             <label>Category</label>
-            <select name="category_id" class="form-control" required>
-                @foreach($categories as $cat)
-                    <option value="{{ $cat->id }}" {{ $transaction->category_id == $cat->id ? 'selected' : '' }}>{{ $cat->name }}</option>
-                @endforeach
+            <select name="category_id" class="form-control" id="categorySelect" required>
+                
             </select>
         </div>
 
@@ -41,9 +39,45 @@
         </div>
 
         <div class="mt-4">
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-            <a href="{{ route('transaction.show', $transaction) }}" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn" style="background-color: #005CAB; color: white;">Save Changes</button>
+            <a href="{{ route('transaction.show', $transaction) }}" class="btn" style="background-color: #6c757d; color: white;">Cancel</a>
         </div>
     </form>
 </div>
+@endsection
+@section('extra-script')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const typeSelect = document.querySelector('select[name="type"]');
+        const categorySelect = document.getElementById('categorySelect');
+
+        const expenseCategories = @json($expenseCategories);
+        const incomeCategories = @json($incomeCategories);
+
+        function updateCategories(type) {
+            categorySelect.innerHTML = '';
+            const list = type === 'income' ? incomeCategories : expenseCategories;
+
+            list.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat.id;
+                option.textContent = cat.name;
+
+                // Pilih default jika sesuai dengan transaksi yang sedang diedit
+                if (cat.id === {{ $transaction->category_id }}) {
+                    option.selected = true;
+                }
+                categorySelect.appendChild(option);
+            });
+        }
+
+        // Ganti kategori saat type berubah
+        typeSelect.addEventListener('change', function() {
+            updateCategories(this.value);
+        });
+
+        // Set awal sesuai tipe transaksi
+        updateCategories(typeSelect.value);
+    });
+</script>
 @endsection

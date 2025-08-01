@@ -2,8 +2,56 @@
     font-family: 'DM Sans', sans-serif;
 }
 
+hr {
+    width: 100%;
+}
+
 .sidebar-app {
-    width: 22% !important;
+    width: 22%;
+    background-color: #E5F4FB
+}
+
+/* Sidebar responsive behavior */
+#sidebar {
+    transition: transform 0.3s ease;
+    z-index: 4;
+}
+
+/* Floating toggle button */
+#sidebarToggle {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #005CAB;
+    color: white;
+}
+
+/* Keep above everything */
+#sidebarToggle {
+    z-index: 1050; /* higher than backdrop */
+}
+
+@media (max-width: 991.99px) {
+    .sidebar-app {
+        background-color: transparent;
+    }
+
+    #sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transform: translateX(-100%);
+        background-color: #E5F4FB;
+        width: 300px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+    }
+    #sidebar.show {
+        transform: translateX(0);
+    }
 }
 
 .nav-pills .nav-link.active {
@@ -12,6 +60,7 @@
 }
 
 .nav-pills .nav-link {
+    width: 100%;
     color: #767676 !important;
     font-size: 1.25rem !important; /* Make text bigger */
     font-weight: 500;

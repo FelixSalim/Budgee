@@ -26,11 +26,19 @@
     @yield('extra-css')
 </head>
 <body class="min-vh-100 d-flex flex-column m-0 p-0">
-    <div class="row m-0 p-0 min-vh-100 w-100">
-        <div class="d-flex flex-column flex-shrink-0 p-3 m-0 sidebar-app" style="background-color: rgb(229, 244, 251);">
+    <div class="row m-0 p-0 w-100">
+        <!-- Toggle button (only for mobile) -->
+        <button id="sidebarToggle" class="btn btn-light d-lg-none position-fixed top-0 start-0 m-3 z-3">
+            <i class="bi bi-list fs-3"></i>
+        </button>
+
+        <!-- Backdrop (only on mobile) -->
+        <div id="sidebarBackdrop" class="d-lg-none position-fixed top-0 start-0 w-100 h-100 bg-dark opacity-50" style="display:none; z-index:3;"></div>
+
+        <div class="d-flex flex-column flex-shrink-0 p-3 m-0 sidebar-app">
             @include('layout.navbar')
         </div>
-        <div class="col">
+        <div class="col-12 col-lg-9">
             <main class="flex-fill">
                 @yield('content')
             </main>
@@ -39,6 +47,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
     @yield('extra-script')
 </body>
 </html>

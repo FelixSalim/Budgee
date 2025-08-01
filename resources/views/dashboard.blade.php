@@ -10,20 +10,15 @@
             <p class="p-0 m-0 dashboard-subtitle">Track and Analyze Your Financial Performance</p>
         </div>
         <div class="col p-0 justify-content-end d-flex align-items-center">
-            <div class="notification-icon-container mx-4">
-                <a href="#" class="text-decoration-none text-dark">
-                    <img src="{{ asset('assets/icons/iconoir_bell-notification.png') }}" class="bell-icon" alt="Notification Icon">
-                </a>
-            </div>
-            <div class="profile-icon-container ms-1">
-                <a href="#" class="text-decoration-none text-dark">
-                    
+            <div class="profile-icon-container">
+                <a href="{{ route('profile') }}" class="text-decoration-none text-dark">
+                    <img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('assets/images/logo.jpg') }}" class="profile-icon rounded-circle" alt="Profile Icon" width="50" height="50">
                 </a>
             </div>
         </div>
     </div>
     <div class="row d-flex flex-row mx-3">
-        <div class="col-7">
+        <div class="col-xl-7 col-12 mb-4">
             <div class="row mb-4 mt-0 mx-0 px-4 py-3 balance-container">
                 <h1 class="balance-title my-2 mx-0 p-0">
                     Current Balance
@@ -35,7 +30,7 @@
                             {{ Auth::user()->currency }} {{ number_format($balance, 2) }}
                         </h1>
                     </div>
-                    <div class="m-0 p-0 d-flex flex-row" style="width: auto;">
+                    <div class="my-2 mx-0 p-0 d-flex flex-row" style="width: auto;">
                         <div class="me-3 ms-0 my-0 p-0">
                             <a href="{{ route('newtransaction') }}">
                                 <button class="btn add-button">
@@ -63,8 +58,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mx-0 mt-4 mb-1 pt-3 pb-0 px-0">
-                    <div class="col m-0 p-0">
+                <div class="row mx-0 mt-2 mb-1 pt-3 pb-0 px-0">
+                    <div class="col ms-0 me-2 my-1 p-0">
                         <div class="d-flex income-container align-items-center m-0">
                             <img src="{{ asset('assets/icons/incomes-icon.png') }}" alt="" width="35" height="35">
                             <div class="income-details mx-3">
@@ -73,7 +68,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col ms-4 me-0 my-0 p-0">
+                    <div class="col ms-2 me-0 my-1 p-0">
                         <div class="d-flex expense-container align-items-center m-0">
                             <img src="{{ asset('assets/icons/expenses-icon.png') }}" alt="" width="35" height="35">
                             <div class="expense-details mx-3">
@@ -129,11 +124,11 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{ $transaction->description ?? '-' }}</td>
+                                <td>{{ $transaction->description ? Str::limit($transaction->description, 15) : '-' }}</td>
                                 <td>{{ \Carbon\Carbon::parse($transaction->transaction_date)->format('d-m-y') }}</td>
                                 <td class="{{ $transaction->type === 'income' ? 'amount-increase' : 'amount-decrease' }}">
                                     {{ $transaction->type === 'income' ? '+' : '-' }}
-                                    {{ Auth::user()->currency }} {{ number_format($transaction->amount, 0) }}
+                                    {{ Auth::user()->currency }} {{ number_format($transaction->amount, 2) }}
                                 </td>
                                 <td>
                                     <a href="{{ route('transaction.show', $transaction->id) }}" class="btn detail-btn">
@@ -150,7 +145,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-5">
+        <div class="col-xl-5 col-12">
             <div class="d-flex flex-column m-0 p-0 category-container">
                 <div class="row m-0 d-flex flex-row align-items-center justify-content-between category-title-container">
                     <div class="m-0 py-2 px-2" style="width: auto;">

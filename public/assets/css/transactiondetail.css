@@ -9,3 +9,7 @@
 .white-icon {
     filter: brightness(0) invert(1);
 }
+
+.btn-primary {
+    background-color: #005CAB !important;
+}

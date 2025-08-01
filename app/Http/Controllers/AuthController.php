@@ -25,7 +25,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'currency' => $request->currency ?? 'IDR',
             'balance' => 0,
-            'profile_picture' => 'assets/images/logo.jpg',
+            'profile_picture' => null, // default profile picture can be set later
         ]);
 
         // login otomatis setelah register
