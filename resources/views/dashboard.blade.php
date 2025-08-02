@@ -12,7 +12,7 @@
         <div class="col p-0 justify-content-end d-flex align-items-center">
             <div class="profile-icon-container">
                 <a href="{{ route('profile') }}" class="text-decoration-none text-dark">
-                    <img src="{{ Auth::user()->profile_picture ? public_path( Auth::user()->profile_picture) : asset('assets/images/logo.jpg') }}" class="profile-icon rounded-circle" alt="Profile Icon" width="50" height="50">
+                    <img src="{{ Auth::user()->profile_picture ? asset( Auth::user()->profile_picture) : asset('assets/images/logo.jpg') }}" class="profile-icon rounded-circle" alt="Profile Icon" width="50" height="50">
                 </a>
             </div>
         </div>

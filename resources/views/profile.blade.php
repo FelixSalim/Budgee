@@ -9,7 +9,7 @@
         @csrf
         <div class="d-flex justify-content-center position-relative">
             <img id="preview_profile"
-                src="{{ $user->profile_picture ? public_path( $user->profile_picture) : asset('assets/images/logo.jpg') }}"
+                src="{{ $user->profile_picture ? asset( $user->profile_picture) : asset('assets/images/logo.jpg') }}"
                 class="rounded-circle shadow" width="150" height="150" alt="profile picture">
 
             <input type="file" name="profile_picture" id="profile_picture_input" class="d-none" accept="image/*"
