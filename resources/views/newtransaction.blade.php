@@ -171,7 +171,7 @@
                 iconType = srcParts[srcParts.length - 2].split('.')[0]; // Get the icon type from the URL
                 iconColor = srcParts[srcParts.length - 1];
     
-                img.src = "{{ asset('assets/images/') }}/" + iconType; // Update the image source
+                img.src = "{{ asset('assets/images/') }}/" + iconType + '.png'; // Update the image source
                 
             });
         }
