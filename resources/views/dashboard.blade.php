@@ -138,7 +138,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="text-center py-3 text-muted">No transactions found</td>
+                                <td colspan="5" class="text-center py-3 text-muted">No transactions found</td>
                             </tr>
                         @endforelse
                     </tbody>
