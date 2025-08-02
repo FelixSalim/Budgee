@@ -170,11 +170,9 @@
                 var srcParts = img.src.split('/');
                 iconType = srcParts[srcParts.length - 2].split('.')[0]; // Get the icon type from the URL
                 iconColor = srcParts[srcParts.length - 1];
-                if (color) {
-                    img.src = "{{ asset('assets/images/') }}/" + iconType; // Update the image source
-                } else {
-                    console.warn(`No color mapping found for ${iconType} with color ${iconColor}`);
-                }
+    
+                img.src = "{{ asset('assets/images/') }}/" + iconType; // Update the image source
+                
             });
         }
 
