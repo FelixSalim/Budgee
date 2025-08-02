@@ -93,6 +93,22 @@
                 <input type="text" name="description" id="desc" class="custom-input" placeholder="Description">
             </div>
 
+
+            @error('amount')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            @error('transaction_date')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            @error('category_id')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            @error('description')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            @if(session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
             <div class="d-flex w-100 justify-content-center mt-5">
                 <button type="submit" class="btn btn-primary rounded-4 mt-3">Add Transaction</button>
             </div>
