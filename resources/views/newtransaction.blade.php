@@ -163,70 +163,15 @@
             });
         });
 
-
-        // --- Mapping icon colors ---
-        const iconColorMap = {
-            'foodbw': {
-                '#B9A400': 'food.png',
-                '#6C00AA': 'foodpurple.png',
-                '#3B9201': 'foodgreen.png',
-                '#AA0000': 'foodred.png',
-                '#AA007D': 'foodpink.png'
-            },
-            'presentbw': {
-                '#AA0000': 'present.png',
-                '#B9A400': 'presentyellow.png',
-                '#3B9201': 'presentgreen.png',
-                '#AA007D': 'presentpink.png',
-                '#6C00AA': 'presentpurple.png'
-            },
-            'healthbw': {
-                '#3B9201': 'health.png',
-                '#B9A400': 'healthyellow.png',
-                '#AA007D': 'healthpink.png',
-                '#6C00AA': 'healthpurple.png',
-                '#AA0000': 'healthred.png'
-            },
-            'paycheckbw': {
-                '#3B9201': 'paycheck.png',
-                '#B9A400': 'paycheckyellow.png',
-                '#AA007D': 'paycheckpink.png',
-                '#6C00AA': 'paycheckpurple.png',
-                '#AA0000': 'paycheckred.png'
-            },
-            'edubw': {
-                '#6C00AA': 'edu.png',
-                '#AA007D': 'edupink.png',
-                '#3B9201': 'edugreen.png',
-                '#AA0000': 'edured.png',
-                '#B9A400': 'eduyellow.png'
-            },
-            'groceriesbw': {
-                '#AA007D': 'groceries.png',
-                '#B9A400': 'groceriesyellow.png',
-                '#3B9201': 'groceriesgreen.png',
-                '#6C00AA': 'groceriespurple.png',
-                '#AA0000': 'groceriesred.png'
-            },
-            'intbw': {
-                '#B9A400': 'int.png',
-                '#AA0000': 'intred.png',
-                '#3B9201': 'intgreen.png',
-                '#AA007D': 'intpink.png',
-                '#6C00AA': 'intpurple.png'
-            }
-        };
-
         // Function to set icon colors based on the mapping
         function setIconColors() {
             document.querySelectorAll('.category-box img').forEach(img => {
                 var iconType, iconColor;
                 var srcParts = img.src.split('/');
-                iconType = srcParts[srcParts.length - 2].split('.')[0] + "bw"; // Get the icon type from the URL
+                iconType = srcParts[srcParts.length - 2].split('.')[0]; // Get the icon type from the URL
                 iconColor = srcParts[srcParts.length - 1];
-                var color = iconColorMap[iconType][iconColor]
                 if (color) {
-                    img.src = "{{ asset('assets/images/') }}/" + color; // Update the image source
+                    img.src = "{{ asset('assets/images/') }}/" + iconType; // Update the image source
                 } else {
                     console.warn(`No color mapping found for ${iconType} with color ${iconColor}`);
                 }
