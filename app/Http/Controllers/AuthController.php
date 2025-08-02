@@ -74,15 +74,10 @@ class AuthController extends Controller
     public function updateProfilePicture(Request $request) {
         $user = auth()->user();
 
-        // Ensure the storage link is created
-        if (!file_exists(public_path('storage'))) {
-            Artisan::call('storage:link');
-        }
-
 
         if($request->hasFile('profile_picture')) {
             $file = $request->file('profile_picture');
-            $path = $file->store('profile_picture', 'public');
+            $path = $file->store('profile_picture', ['disk' => 'profile_picture']);
 
             $user->profile_picture = $path;
             $user->save();
