@@ -3,7 +3,7 @@
 @section('extra-css')
     <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
 @endsection
-@section('content')W
+@section('content')
     <div class="row p-3 m-3 title-section">
         <div class="col p-0">
             <h1 class="h1 p-0 m-0 dashboard-title">Dashboard</h1>
@@ -12,7 +12,7 @@
         <div class="col p-0 justify-content-end d-flex align-items-center">
             <div class="profile-icon-container">
                 <a href="{{ route('profile') }}" class="text-decoration-none text-dark">
-                    <img src="{{ Auth::user()->profile_picture ? asset( Auth::user()->profile_picture) : asset('assets/images/logo.jpg') }}" class="profile-icon rounded-circle" alt="Profile Icon" width="50" height="50">
+                    <img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('assets/images/logo.jpg') }}" class="profile-icon rounded-circle" alt="Profile Icon" width="50" height="50">
                 </a>
             </div>
         </div>

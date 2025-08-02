@@ -36,13 +36,6 @@ return [
             'throw' => false,
         ],
 
-        'profile_picture' => [
-            'driver' => 'local',
-            'root' => public_path('assets/images/profile_picture'),
-            'visibility' => 'public',
-            'throw' => false,
-        ],
-
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
