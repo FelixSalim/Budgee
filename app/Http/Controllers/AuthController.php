@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Artisan;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -72,6 +73,12 @@ class AuthController extends Controller
 
     public function updateProfilePicture(Request $request) {
         $user = auth()->user();
+
+        // Check if storage link is set up, set if not
+        if (!file_exists(public_path('storage'))) {
+            Artisan::call('storage:link');
+        }
+        
 
         if($request->hasFile('profile_picture')) {
             $file = $request->file('profile_picture');
