@@ -38,7 +38,7 @@ return [
 
         'profile_picture' => [
             'driver' => 'local',
-            'root' => asset('assets/images/profile_picture'),
+            'root' => public_path('assets/images/profile_picture'),
             'visibility' => 'public',
             'throw' => false,
         ],
