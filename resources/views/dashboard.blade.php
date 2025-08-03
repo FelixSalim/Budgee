@@ -110,7 +110,7 @@
                                             @if($transaction->category && $transaction->category->icon)
                                                 @php
                                                     $iconBase = pathinfo($transaction->category->icon, PATHINFO_FILENAME); // remove extension
-                                                    $iconFile = $iconBase . 'bw.png'; // add bw.png
+                                                    $iconFile = $iconBase . '.png'; // add .png
                                                 @endphp
                                                 <img
                                                     width="22.5" height="22.5"

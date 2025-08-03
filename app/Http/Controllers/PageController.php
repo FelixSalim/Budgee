@@ -76,7 +76,7 @@ class PageController extends Controller
                     'color' => $category->icon_color ?? '#ccc',
                     'total' => $transactions->sum('amount'),
                     'planned_outlay' => $category->planned_outlay ?? 0,
-                    'icon' => str_replace('.png', 'bw.png', $category->icon),
+                    'icon' => str_replace('.png', '.png', $category->icon),
                 ];
             })
             ->values();
@@ -98,7 +98,7 @@ class PageController extends Controller
                     'color' => $category->icon_color ?? '#ccc',
                     'total' => $transactions->sum('amount'),
                     'planned_outlay' => $category->planned_outlay ?? 0,
-                    'icon' => str_replace('.png', 'bw.png', $category->icon),
+                    'icon' => str_replace('.png', '.png', $category->icon),
                 ];
             })
             ->values();
