@@ -110,7 +110,7 @@
                                             @if($transaction->category && $transaction->category->icon)
                                                 @php
                                                     $iconBase = pathinfo($transaction->category->icon, PATHINFO_FILENAME); // remove extension
-                                                    $iconFile = $iconBase . 'bw.png'; // add bw.png
+                                                    $iconFile = $iconBase . '.png'; // add bw.png
                                                 @endphp
                                                 <img
                                                     width="22.5" height="22.5"
@@ -234,7 +234,7 @@
                 legendHtml += `
                     <div class="d-flex flex-row align-items-center justify-content-between mx-0 my-1 p-0 legend-items">
                         <div class="m-0 p-0 icon-container" style="background-color:${cat.color}">
-                            <img width="22.5" height="22.5" src="/assets/images/${cat.icon}" class="white-icon">
+                            <img width="22.5" height="22.5" src="{{ asset('assets/images/${cat.icon}') }}" class="white-icon">
                         </div>
                         <p class="mx-2 my-0 p-0 w-25">${cat.name}</p>
                         <p class="mx-2 my-0 p-0">${percentage}%</p>

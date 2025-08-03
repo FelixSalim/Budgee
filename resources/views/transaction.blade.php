@@ -71,7 +71,7 @@
                         <td class="py-3">
                             <div class="row d-flex align-items-center m-0 p-0">
                                 <div class="col-3 d-flex justify-content-center align-items-center me-2 icon-container" style="background-color: {{ $transaction->category->icon_color }}">
-                                    <img width="20" height="20" src="{{ asset('assets/images/' . str_replace('.png', 'bw.png', $transaction->category->icon)) }}" alt="{{ $transaction->category->name }}" class="m-0 p-0 icon-white">
+                                    <img width="20" height="20" src="{{ asset('assets/images/' . str_replace('.png', '.png', $transaction->category->icon)) }}" alt="{{ $transaction->category->name }}" class="m-0 p-0 icon-white">
                                 </div>
                                 <div class="col m-0 p-0">
                                     <p class="m-0 p-0">{{ $transaction->category->name }}</p>
